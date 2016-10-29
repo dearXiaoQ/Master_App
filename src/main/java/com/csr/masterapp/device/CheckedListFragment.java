@@ -24,7 +24,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.csr.masterapp.CheckedItemArrayAdapter;
 import com.csr.masterapp.CheckedListItem;
 import com.csr.masterapp.DevicesComparator;
 import com.csr.masterapp.entities.Device;

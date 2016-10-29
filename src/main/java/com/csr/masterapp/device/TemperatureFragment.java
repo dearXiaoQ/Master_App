@@ -23,7 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.csr.masterapp.DeviceAdapter;
+import com.csr.masterapp.adapter.DeviceAdapter;
 import com.csr.masterapp.DeviceController;
 import com.csr.masterapp.R;
 import com.csr.masterapp.TemperatureControllerInterface;

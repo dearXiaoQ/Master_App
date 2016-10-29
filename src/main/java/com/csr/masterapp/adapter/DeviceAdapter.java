@@ -3,7 +3,7 @@
  Copyright Cambridge Silicon Radio Limited 2014 - 2015.
  ******************************************************************************/
 
-package com.csr.masterapp;
+package com.csr.masterapp.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.csr.masterapp.R;
 import com.csr.masterapp.entities.Device;
 
 import java.util.ArrayList;

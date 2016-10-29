@@ -18,7 +18,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.csr.masterapp.DeviceAdapter;
+import com.csr.masterapp.adapter.DeviceAdapter;
 import com.csr.masterapp.DeviceController;
 import com.csr.masterapp.R;
 import com.csr.masterapp.entities.Device;

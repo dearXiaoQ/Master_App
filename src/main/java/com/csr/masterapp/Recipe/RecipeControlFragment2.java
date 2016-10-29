@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.csr.masterapp.DeviceAdapter;
+import com.csr.masterapp.adapter.DeviceAdapter;
 import com.csr.masterapp.DeviceController;
 import com.csr.masterapp.MainActivity;
 import com.csr.masterapp.R;

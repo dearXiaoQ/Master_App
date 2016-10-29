@@ -25,7 +25,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import com.csr.masterapp.DeviceAdapter;
+import com.csr.masterapp.adapter.DeviceAdapter;
 import com.csr.masterapp.DeviceController;
 import com.csr.masterapp.DevicesComparator;
 import com.csr.masterapp.LightState;

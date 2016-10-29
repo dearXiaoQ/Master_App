@@ -3,7 +3,7 @@
  Copyright Cambridge Silicon Radio Limited 2014 - 2015.
  ******************************************************************************/
 
-package com.csr.masterapp;
+package com.csr.masterapp.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -16,6 +16,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+
+import com.csr.masterapp.CheckedListItem;
+import com.csr.masterapp.R;
 
 import java.util.ArrayList;
 
