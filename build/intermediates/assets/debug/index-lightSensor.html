@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>light sensor</title>
+
+    <!--<link href="styles/bootstrap.min.css">-->
+    <link href="styles/progressbar.css" rel="stylesheet">
+    <!--<link href="styles/ionic.min.css" rel="stylesheet">-->
+    <style>
+        .yellow {
+            color: yellow;
+        }
+
+        /*.light {*/
+        /*height:6em;*/
+        /*width:6em;*/
+        /*position:absolute;*/
+        /*top:1em;*/
+        /*left:1em;*/
+        /*z-index:9;*/
+        /*}*/
+        /*.play{*/
+        /**/
+        /*}*/
+        .light.speed1 {
+            /*position: absolute;*/
+            animation: light 2s infinite linear;
+        }
+
+        .light.speed2 {
+            /*position: absolute;*/
+            animation: light 1.6s infinite linear;
+        }
+
+        .light.speed3 {
+            /*position: absolute;*/
+            animation: light 1s infinite linear;
+        }
+
+        @keyframes light {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div style="position: absolute;width: 100%;height: 100% ;">
+    <div style="text-align: center;color: #B6B6B6;    position: absolute;
+    width: 50%;    height: 50%;    margin: auto;    left: 0;    right: 0;    top: 0;    bottom: 0;">
+        <img onclick="lightClick()" id="light" class="light speed1" src="images/light.png" height="80%"/>
+        <!--<div style="color: #e77919 ;font-size: 3em; margin-top: 0.5em">-->
+            <!--<span id="temp">30</span>-->
+        <!--</div>-->
+        <section class="container">
+            <div class="progress">
+                <span class="orange" style="width:0%;"><span>0%</span></span>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="scripts/libs/jquery-2.0.3.min.js"></script>
+<script type="application/javascript">
+    var count = 0;
+    function lightClick() {
+        switch (count){
+
+            case 0: className='light speed1';
+                break;
+            case 1: className='light speed2';
+                break;
+            case 2: className='light speed3';
+
+                break;
+            default :className='light speed1';
+                break;
+        }
+        document.getElementById('light').className = className;
+    }
+
+
+    function loading(percent){
+        $('.progress span').animate({width:percent},1000,function(){
+            $(this).children().html(percent);
+        })
+    }
+
+    var lastData=0;
+    function getLightSensorData(data){
+    data =100-data*2
+    if(lastData == data )
+    return;
+    lastData = data;
+
+        console.log('LightSensorData: ' + data );
+        var str = data+'%';
+        console.log('str = '+str);
+        loading(str);
+        lightClick();
+    }
+
+    loading('10%');
+</script>
+</body>
+</html>

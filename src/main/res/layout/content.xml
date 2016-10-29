@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:id="@+id/Content_herder"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#ffffff">
+
+        <RadioGroup
+            android:id="@+id/Content_rg"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/content_rb_device"
+                style="@style/tab_style"
+                android:drawableLeft="@drawable/tab_device"
+                android:text="@string/equipment" />
+
+            <RadioButton
+                android:id="@+id/content_rb_scene"
+                style="@style/tab_style"
+                android:drawableLeft="@drawable/tab_scene"
+                android:text="@string/scene" />
+
+            <RadioButton
+                android:id="@+id/content_rb_recipe"
+                style="@style/tab_style"
+                android:drawableLeft="@drawable/tab_recipe"
+                android:text="@string/menu" />
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="MasterApp"
+            android:textColor="#EBEBEB"
+            android:typeface="serif"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:textSize="30dp" />
+
+        <RelativeLayout
+            android:id="@+id/tab_rlyt_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent">
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/device_btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:text="添加设备"
+                android:textSize="14sp"
+                android:textColor="#8b8a8a"
+                android:background="@drawable/button_common_selector"/>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/device_btn_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/device_btn_add"
+                android:layout_marginRight="30dp"
+                android:text="@string/device_management"
+                android:textSize="14sp"
+                android:textColor="#8b8a8a"
+                android:background="@drawable/button_common_selector"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tab_rlyt_scene"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:visibility="visible">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:text="@string/add_sence"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:textColor="#8b8a8a"
+                android:background="@drawable/button_common_selector"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:visibility="gone"
+                android:text="@string/execution_log"
+                android:textSize="14sp"
+                android:textColor="#8b8a8a"
+                android:background="@drawable/button_common_selector"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tab_rlyt_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:visibility="visible">
+
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#eeeeee" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/listLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:id="@+id/listcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true" />
+
+        <ImageButton
+            android:id="@+id/floatIB"
+            android:visibility="visible"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/float_button_bg"
+            android:layout_marginTop="450dp"
+            android:layout_marginRight="50dp"
+            android:padding="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <Button
+            android:id="@+id/scene_btn_log"
+            android:visibility="gone"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="325dp"
+            android:layout_marginRight="50dp"
+            android:padding="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/button_sence_log"/>
+
+
+
+        <Button
+            android:id="@+id/scene_btn_add"
+            android:visibility="gone"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginRight="175dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/button_add_sence_selectior"
+            />
+
+        <Button
+            android:id="@+id/recipe_btn_select"
+            android:visibility="visible"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="325dp"
+            android:layout_marginRight="50dp"
+            android:padding="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/menu_filter"/>
+
+        <Button
+            android:id="@+id/recipe_btn_collect"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="370dp"
+            android:layout_marginRight="135dp"
+            android:padding="25dp"
+            android:layout_alignParentRight="true"
+
+            android:layout_alignParentTop="true"
+            android:background="@drawable/menu_save"/>
+
+        <Button
+            android:id="@+id/recipe_btn_download"
+            android:visibility="visible"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginRight="175dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/menu_download"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

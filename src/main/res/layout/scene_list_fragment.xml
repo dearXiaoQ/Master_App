@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:baselineAligned="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+
+    tools:context="com.csr.masterapp.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/rv_no_scene"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/no_scene"
+            android:layout_marginTop="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/sence_is_empty"
+            android:src="@drawable/no_scene"/>
+
+        <TextView
+            android:layout_below="@id/no_scene"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#bebebe"
+            android:text="@string/brother_please_add_sence"/>
+    </RelativeLayout>
+
+
+    <ListView
+        android:id="@+id/scene_lv_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2" />
+
+    <RelativeLayout
+        android:id="@+id/scene_fraly_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+
+    <ListView
+        android:id="@+id/lv_list_scene"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:background="#ffffff">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#d6d6d6" />
+
+            <TextView
+                android:id="@+id/view_open_scene"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:hint="@string/open_sence"
+                android:textColor="#6c6c6c"
+                android:textSize="20sp" />
+
+            <Switch
+                android:layout_marginStart="20dp"
+                android:id="@+id/switch_scene"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/view_open_scene"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="30dp" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btn_save_scene"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/button_common_selector"
+                android:text="@string/save_sence"
+                android:textSize="16sp"
+                android:textColor="#ff6038"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/drawer_shadow" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

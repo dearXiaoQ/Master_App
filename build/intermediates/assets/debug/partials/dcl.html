@@ -1,0 +1,109 @@
+<ion-view ng-controller="hotPotController">
+    <ion-content  ng-style="setHeight"   scrollbar-y="false" zooming="false"
+                 direction="y" has-bouncing="true">
+        <!--<div class="hotPotStatus">-->
+            <!--<svg xmlns="http://www.w3.org/2000/svg">-->
+                <!--<circle cx="50%" cy="50%" r="45%" stroke-width="5%" style="box-shadow:0px 10px 5px #000 "></circle>-->
+                <!--<circle stroke="{{powerRange.color}}"-->
+                        <!--stroke-dasharray="{{powerRange.process/11*powerRange.PI}}  {{powerRange.PI*(1-powerRange.process/11)}}"-->
+                        <!--cx="50%" cy="50%"-->
+                        <!--r="45%" stroke-width="5%">-->
+                <!--</circle>-->
+            <!--</svg>-->
+            <!--<div class="powerFont ">-->
+                <!--<p class="primary-text-color" style="font-size: 5em;">-->
+                    <!--{{powerRange.process*200}}-->
+                    <!--<br>-->
+                    <!--<span class="three-text-color  " style="font-size: 0.4em">w of 2200</span>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="hotPotButton " style="-->
+    <!--width: 80px;-->
+    <!--height: 80px;-->
+    <!--position: absolute;-->
+    <!--float: left;-->
+    <!--left: 15%;-->
+    <!--text-align: center;-->
+    <!--line-height: 80px;-->
+    <!--font-size: 2.5em;" ng-click="powerRange.start= !powerRange.start; powerSWonClick(powerRange);">-->
+            <!--<svg xmlns="http://www.w3.org/2000/svg">-->
+                <!--<circle cx="50%" cy="50%" r="45%" stroke-width="5%" style="box-shadow:0px 10px 5px #000 "></circle>-->
+            <!--</svg>-->
+            <!--<i class="icon"  ng-class="{true:'ion-ios-pause',false:'ion-ios-play'}[powerRange.start]" style="color: #03A9F4" ></i>-->
+        <!--</div>-->
+        <!--<div class="hotPotButton " style="-->
+    <!--width: 80px;-->
+    <!--height: 80px;-->
+    <!--position: absolute;-->
+    <!--float: right;-->
+    <!--right: 15%;-->
+    <!--text-align: center;-->
+    <!--line-height: 80px;-->
+    <!--font-size: 2.5em;" ng-click="powerRange.start= true; powerSWonClick(powerRange);">-->
+            <!--<svg xmlns="http://www.w3.org/2000/svg">-->
+                <!--<circle cx="50%" cy="50%" r="45%" stroke-width="5%" style="box-shadow:0px 10px 5px #000 "></circle>-->
+            <!--</svg>-->
+            <!--<i class="icon ion-ios-paperplane-outline" style="color: #03A9F4" ng-click=""></i>-->
+        <!--</div>-->
+
+
+        <!--<div class="card" style="padding-left: 10px;padding-right: 10px ;border-radius: 5px;margin-top: 100px">-->
+            <!--<z-range z-id='1' z-min="1" z-max="11"-->
+                     <!--z-value="powerRange.process" ></z-range>-->
+        <!--</div>-->
+        <div ng-show="true" ng-cloak style="margin-top: 100px">
+            <div class="card" style="position: relative;border-radius: 10px;overflow: hidden;">
+                <br>
+
+                <div style="color: #ff5b0c;font-size: 4em;text-align: center">
+                    {{(powerRange.process*200)}}<span style="font-size: 20px">W</span><span  ng-if="autoCookObj.holdOn" style="line-height:35px;float: left;left:30px;font-size: 0.5em;color:#727272 ">第{{autoCookObj.step+1}}步</span>
+                <!--<div class="button button-light" style="float: right">button-light</div>-->
+                </div>
+                <br>
+                <!--<br>-->
+                <!--<button class="button button-full button-light" ng-click="powerRange.start= true; powerSWonClick(powerRange);">-->
+                    <!--发送-->
+                <!--</button>-->
+                <div style="position: relative">
+                    <div id="rangeBar" style="width: 100%;height: 150px;
+                            background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0.09) 0);
+                            background-size: 20px 100%;
+                            position: absolute;
+                            top:0;left: 0;border-radius: 0 0 0px 0px;
+                            "></div>
+                    <div style="width: 100%;height: 20px;position: absolute;top: 0;left: 0;
+                        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.20) , rgba(0, 0, 0, 0.01) 50%  ) "></div>
+                    <div ng-if="powerRange.start==true" style="width: 100%;height: 150px;border-radius: 0 0 0px 0px;
+                            background: -webkit-linear-gradient(left, rgb(255, 254, 0) , rgb(255, 61, 0)  );
+                            "></div>
+                    <div ng-if="powerRange.start==false" style="width: 100%;height: 150px;border-radius: 0 0 0px 0px;
+                            background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.11) , rgba(0, 0, 0, 0.51)  );
+                            "></div>
+
+                    <div style="box-shadow:0 1px 5px rgba(0, 0, 0, 0.8);margin: auto;;border-radius: 50% ;display:inline-block;height: 30px;width: 30px;background-color: white ;position:
+                        absolute;z-index: 1;top: 0;bottom:0;left: {{(powerRange.process/11)*rangeBarWidth}}px">
+                        <div style="display:inline-block;height: 150px;width: 5px;background-color: white ;position:
+                        absolute;z-index: 1;margin: auto;left: 0;right: 0;top:-60px"></div>
+                    </div>
+                    <i style="  position: absolute;bottom: 10px;left: 5%;color: white">200w</i>
+                    <!--<i style="  position: absolute;bottom: 10px;left: 0;right: 0;color: white">1000w</i>-->
+                    <i style="  position: absolute;bottom: 10px;right: 5px;color: white">2200w</i>
+
+                    <div class="powerRange" style="position: absolute;margin: auto;top: 0;bottom:0;width: 100%;height: 43px">
+                        <z-range z-min="0" z-max="11" z-value="powerRange.process" z-id="abc" z-test="abc123" call-back="OnReleaseCallback()" ></z-range>
+                    </div>
+                </div>
+                <!--<br/>-->
+            </div>
+            <div class="card">
+                <div class="button-bar">
+                    <a class="button" ng-click="startAutoCookClick()"><span ng-if="autoCookObj.holdOn">停止自动烹饪</span><span ng-if="!autoCookObj.holdOn">启动自动烹饪</span></a>
+                    <!--<a class="button" ng-click="powerRange.start= !powerRange.start; powerSWonClick(powerRange);"><span ng-if="powerRange.start==false">开机</span><span ng-if="powerRange.start==true">关机</span></a>-->
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/activity_header" />
+
+    <RelativeLayout
+        android:id="@+id/rv_timer_repeat"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:padding="20dp"
+        android:background="@drawable/button_common_selector">
+
+        <TextView
+            android:id="@+id/repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/agasin"/>
+
+        <TextView
+            android:layout_below="@id/repeat"
+            android:id="@+id/repeat_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/only_implement_one"
+            android:textColor="#636363"
+            android:textSize="16sp"/>
+
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/link"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <com.csr.masterapp.weight.WheelView
+            android:id="@+id/wheel_timing_hour"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal" />
+
+        <com.csr.masterapp.weight.WheelView
+            android:id="@+id/wheel_timing_minute"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
+
+</LinearLayout>

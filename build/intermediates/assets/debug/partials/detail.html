@@ -1,0 +1,102 @@
+<!-- TODO:2015-12-23 vijanny 详细设置页面-->
+<ion-view ng-cloak class="cookDetail" ng-controller="detailController" data-ng-init="detailControllerInit()">
+    <div class="header">
+        <img class="productIcon" ng-src="images/menuOneSelfSaucer.png">
+        <img style="position: absolute; width: 50px;height: 50px;margin:auto;bottom:0;top: 0; left: 0; right: 0"
+             ng-src="{{curMenuItem.menuType}}">
+
+        <p style="text-align: center">{{curMenuItem.menuText}}</p>
+    </div>
+
+    <ion-content style="top:143px">
+        <div ng-if="cookDetail.curShow==cookDetailShowType.chang">
+            <!-- TODO：2016-1-12 vijanny ‘修改菜谱’功能界面"-->
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">菜谱名称</span>
+                    <input type="text" ng-model="curMenuItem.menuText">
+                </label>
+            </div>
+            <z-diy></z-diy>
+            <div ng-cloak class="diyCommControllerStart card">
+                <div>
+                    <button class="button button-block button-positive" ng-click="commButtonItem.startItem.menusFun()">
+                        <img ng-src="{{commButtonItem.startItem.menusIcon}}" style="vertical-align: middle;width: 24px">
+                        {{commButtonItem.startItem.menusText}}
+                    </button>
+                </div>
+                <div class="button-bar bar-stable">
+                    <a class="button" ng-repeat="menu in commButtonItem.commButtonItem" ng-click="menu.menusFun()"
+                       style="color:#1FB4FF ">
+                        <img ng-src="{{menu.menusIcon}}" style="vertical-align: middle;width: 24px">
+                        {{menu.menusText}}
+                    </a>
+                </div>
+            </div>
+            <div style="height: 100px"></div>
+        </div>
+        <div ng-if="cookDetail.curShow==cookDetailShowType.detail">
+            <div class="card" ng-if="detailSetItemEn.riceType">
+                <p style="text-align: center;position: relative;margin: 0"><span style="position: absolute;left: 5px">{{riceType.type}}</span>
+                    {{riceType.infoText[riceType.index]}}</p>
+                <!--<z-range   z-min="riceType.indexMin" z-max="riceType.indexMax" z-value=riceType.Index z-id="gfgf1"></z-range>-->
+                <div style="width: 92%;margin: auto;left: 0;right: 0">
+                    <z-range style="width: 100%;" z-id='gfgf1' z-min="0" z-max="{{riceType.infoText.length-1}}"
+                             z-value="riceType.index"></z-range>
+                </div>
+                <div style="position: relative;text-align: center;height: 10px;margin-top: 5px">
+                    <i style="  position: absolute;bottom: 0px;left: 5px;color: #1FB4FF">{{riceType.infoText[0]}}</i>
+                    <i style="  position: absolute;bottom: 0px;left: 0;right: 0;color: #1FB4FF">{{riceType.infoText[1]}}</i>
+                    <i style="  position: absolute;bottom: 0px;right: 5px;color: #1FB4FF">{{riceType.infoText[2]}}</i>
+                </div>
+            </div>
+            <div class="card" ng-if="detailSetItemEn.tasteType">
+                <p style="text-align: center;position: relative;margin: 0"><span style="position: absolute;left: 5px">{{tasteType.type}}</span>
+                    {{tasteType.infoText[tasteType.index]}}</p>
+                <!--<z-range   z-min="riceType.indexMin" z-max="riceType.indexMax" z-value=riceType.Index z-id="gfgf1"></z-range>-->
+                <div style="width: 92%;margin: auto;left: 0;right: 0">
+                    <z-range style="width: 100%;" z-id='gfgf2' z-min="0" z-max="{{tasteType.infoText.length-1}}"
+                             z-value="tasteType.index"></z-range>
+                </div>
+
+                <div style="position: relative;text-align: center;height: 10px;margin-top: 5px">
+                    <i style="  position: absolute;bottom: 0px;left: 5px;color: #1FB4FF">{{tasteType.infoText[0]}}</i>
+                    <i style="  position: absolute;bottom: 0px;left: 0;right: 0;color: #1FB4FF">{{tasteType.infoText[1]}}</i>
+                    <i style="  position: absolute;bottom: 0px;right: 5px;color: #1FB4FF">{{tasteType.infoText[2]}}</i>
+                </div>
+            </div>
+            <div class="card" ng-if="detailSetItemEn.cookTimeType">
+                <p style="text-align: center;position: relative;margin: 0"><span style="position: absolute;left: 5px">{{cookTimeType.type}}</span>
+                    {{cookTimeType.infoText[0]+cookTimeType.index*cookTimeType.step}}分钟</p>
+                <!--<z-range   z-min="riceType.indexMin" z-max="riceType.indexMax" z-value=riceType.Index z-id="gfgf1"></z-range>-->
+                <div style="width: 92%;margin: auto;left: 0;right: 0">
+                    <z-range style="width: 100%" z-id='gfgf3' z-min="{{cookTimeType.min}}" z-max="{{cookTimeType.max}}"
+                             z-value="cookTimeType.index"></z-range>
+                </div>
+                <div style="position: relative;text-align: center;height: 10px;margin-top: 5px">
+                    <i style="  position: absolute;bottom: 0px;left: 5px;color: #1FB4FF">{{cookTimeType.infoText[0]}}</i>
+                    <i style="  position: absolute;bottom: 0px;left: 0;right: 0;color: #1FB4FF">{{cookTimeType.infoText[1]}}</i>
+                    <i style="  position: absolute;bottom: 0px;right: 5px;color: #1FB4FF">{{cookTimeType.infoText[2]}}</i>
+                </div>
+            </div>
+            <div ng-cloak class="diyCommControllerStart card">
+                <div>
+                    <button class="button button-block button-positive" ng-click="commButtonItem.startItem.menusFun()">
+                        <img ng-src="{{commButtonItem.startItem.menusIcon}}" style="vertical-align: middle;width: 24px">
+                        {{commButtonItem.startItem.menusText}}
+                    </button>
+                </div>
+                <div class="button-bar bar-stable">
+                    <a class="button" ng-repeat="menu in commButtonItem.commButtonItem" ng-click="menu.menusFun()"
+                       style="color:#1FB4FF ">
+                        <img ng-src="{{menu.menusIcon}}" style="vertical-align: middle;width: 24px">
+                        {{menu.menusText}}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+    <!--<time-picker ng-if="menuListTimePickerEn==false"  show="timePickerShow" value="timePackerValue" call-back="timePickerCallBack()"></time-picker>-->
+    <!--<comm-button show="commButtonShow" value="commButtonItem" call-back="commButtonCallBack()"></comm-button>-->
+</ion-view>

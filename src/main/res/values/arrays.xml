@@ -1,0 +1,20 @@
+<resources>
+
+    <string-array name="screen_names">
+        <item>Light Control</item>
+        <item>Temperature Control</item>
+        <item>Device Association</item>
+        <item>Configuration</item>
+        <item>Security Settings</item>
+        <item>About</item>
+    </string-array>
+
+    <string-array name="battery_states">
+        <item>Battery is powering device</item>
+        <item>Battery is charging</item>
+        <item>Device is externally powered</item>
+        <item>Service is required for battery </item>
+        <item>Battery needs replacement</item>
+    </string-array>
+
+</resources>

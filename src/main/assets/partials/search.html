@@ -1,0 +1,19 @@
+<ion-view ng-controller="searchController">
+    <div ng-cloak class="searchController " >
+        <!--ng-class="{true:'left',false:'right'}[showStatus=='searchControllerShow']">-->
+        <ion-content cancelable='false' class="filterMainMenus" has-bouncing="true">
+            <div class="list">
+                <ion-item class="item " ng-repeat="filterItem in filterMenuItems "
+                          ng-click="filterMainItemClick(filterItem)">
+                    <span style="float: left;padding-left: 10px ;font-size: 1em;color: #4A4A4A;font-weight: 700">{{filterItem.filterMenuType}}</span>
+
+                    <div style="float: right">
+                    <span style="float: left;padding-left: 10px;color:#9B9B9B;font-size: 0.9em "><span
+                            ng-repeat="item in filterItem.filterTypeItems " ng-if="item.selected">{{item.item}}、</span></span>
+                        <img ng-src="images/rightangle.png" style="vertical-align: middle" width="24"/>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-content>
+    </div>
+</ion-view>

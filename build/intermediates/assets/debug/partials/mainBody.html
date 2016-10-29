@@ -1,0 +1,87 @@
+<ion-view ng-cloak class="mainBody" ng-controller="mainBodyController" data-ng-init="mainBodyControllerInit()">
+
+    <!--<div class="footerMark" ></div>-->
+    <ion-scroll has-bouncing="true" scrollbar-y="false" zooming="false" direction="y" class="mainBodyScroll"
+                delegate-handle="mainScroll">
+        <!-- TODO:工作状态主界面-->
+        <div>
+            <div class="header">
+                <img class="productIcon" ng-src="{{productIcon}}">
+
+                <p>{{$root.productInfo}}</p>
+            </div>
+            <div class="cookerStatusBody" >
+                <div class="headerMark"></div>
+                <div class="cookerStatus" ng-cloak>
+                    <div class="svgBase" ng-if="cookStatus.curStatus==cookStatusType.keepWarm.curStatus ">
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50%" cy="50%" r="40%" stroke-width="5%" class="processBar1 "></circle>
+                            <circle cx="50%" cy="50%" r="35%" stroke-width="5%" class="processBar2 "></circle>
+                            <circle cx="50%" cy="50%" r="30%" stroke-width="5%" class="processBar3 "></circle>
+                        </svg>
+                    </div>
+                    <div class="cookingImg" ng-if="cookStatus.curStatus!=cookStatusType.keepWarm.curStatus ">
+                        <img src="images/状态-制作中-统一icon.png"/>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50%" cy="50%" r="45%" stroke-width="5%" style="box-shadow:0px 10px 5px #000 "></circle>
+                        <circle stroke="{{processBarColor}}"
+                                stroke-dasharray="{{inputRang/100*PI}}  {{PI*(1-inputRang/100)}}" cx="50%" cy="50%"
+                                r="45%" stroke-width="5%">
+                        </circle>
+                    </svg>
+                    <div class="cookInfoBody">
+                        <p class="cookClass">{{cookStatus.cookInfo}}</p>
+
+                        <h1 class="cookedOk " ng-if="cookStatus.curStatus==cookStatusType.keepWarm.curStatus"><span
+                                class="icon ion-android-done"></span></h1>
+                        <h4 class="cookingStatus " ng-if="cookStatus.curStatus!=cookStatusType.keepWarm.curStatus">
+                            {{cookStatus.time.hours}}<span>时</span>{{cookStatus.time.minutes}}<span>分</span></h4>
+
+                        <p class="cookTimeLeft " ng-if="cookStatus.curStatus!=cookStatusType.keepWarm.curStatus">
+                            还需{{workTimeLeft}}分钟</p>
+                    </div>
+                </div>
+
+                <div style="position: relative">
+                    <div class="cookMenuTex" >
+                        <p>{{curMenuItem.menuText}}</p>
+                    </div>
+                </div>
+
+
+                <div class="cookDiyMenu" ng-cloak ng-show="cookStatus.curStatus==cookStatusType.cookingDiy.curStatus">
+                    <span>{{cookDiy.step}}</span>
+                    <i class="icon ion-ios-timer-outline"></i>
+                    <span>{{cookDiy.timeMinutes}}</span>分钟
+                    <i class="icon ion-thermometer"></i>
+                    <span>{{cookDiy.temp}}</span>度
+                </div>
+                <div ng-controller="mainBodyController" ng-if="curMenuItem.menuId==2">
+                           <heatline   elevation="curve.elevation"
+                                       temperature="curve.temperature"
+                                       taste="curve.taste"
+                                       riceType="curve.riceType"
+                                       voltage="curve.voltage"
+                                       step='curve.step'>
+                           </heatline>
+                           <br/><br/><br/>
+                </div>
+            </div>
+        </div>
+    </ion-scroll>
+    <div ng-cloak class="cookButton">
+        <div class="footerMark"></div>
+
+        <div ng-class="{true:'clickEn',false:''}[cookButtonTipEn]" class="button-bar bar-stable mainButtonArr" ng-cloak>
+            <a class="button" ng-repeat="menu in cookStatus.cookControlButtonArr" ng-click="menu.fun()"><img
+                    ng-src="images/operateCancelWith.png">{{menu.info}}</a>
+        </div>
+        <div class="button-bar bar-stable subButtonArr" ng-class="{true:'clickEn',false:''}[cookButtonTipEn]" ng-cloak>
+            <button class="button " ng-repeat="menu in cookStatus.cookControlSubButtonArr" ng-click="menu.fun()"><img
+                    ng-src="images/{{menu.icon}}.png">{{menu.info}}
+            </button>
+        </div>
+    </div>
+</ion-view>

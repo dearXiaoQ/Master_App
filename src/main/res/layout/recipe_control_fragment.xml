@@ -1,0 +1,153 @@
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/network_association"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+	android:background="#ffffff">
+
+	 <include layout="@layout/activity_header"
+		 android:id="@id/header"
+		 />
+
+     <Spinner
+         android:id="@+id/spinnerSensorGroup"
+		 android:visibility="gone"
+         android:layout_width="match_parent"
+         android:layout_height="20dp"/>
+
+	 <Button
+		 android:visibility="gone"
+		 android:id="@+id/sendpower"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content"
+		 android:text="@string/send_800w"/>
+	 <Button
+		 android:visibility="gone"
+		 android:id="@+id/receivetemp"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content"
+		 android:text="@string/get_temp_data_and_print"/>
+
+	 <WebView
+		 android:layout_below="@+id/header"
+		 android:id="@+id/webview"
+		 android:layout_width="match_parent"
+		 android:layout_height="match_parent"
+
+		 />
+	 <RelativeLayout
+		 android:id="@+id/rv_btn_group"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content"
+		 android:layout_alignParentBottom="true"
+		 android:layout_centerHorizontal="true"
+		 android:layout_gravity="center"
+		 android:visibility="gone">
+
+		 <Button
+			 android:id="@+id/button1"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:padding="10dp"
+			 android:text="@string/open"
+			 android:textSize="30dp" />
+
+		 <Button
+			 android:id="@+id/button2"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_toRightOf="@id/button1"
+			 android:padding="10dp"
+			 android:text="@string/close"
+			 android:textSize="30dp" />
+
+		 <Button
+			 android:id="@+id/button3"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_toRightOf="@id/button2"
+			 android:padding="10dp"
+			 android:text="@string/gears_1"
+			 android:textSize="30dp" />
+
+		 <Button
+			 android:id="@+id/button4"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_toRightOf="@id/button3"
+			 android:padding="10dp"
+			 android:text="@string/gears_2"
+			 android:textSize="30dp" />
+
+		 <Button
+			 android:id="@+id/button5"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_toRightOf="@id/button4"
+			 android:padding="10dp"
+			 android:text="@string/gears_3"
+			 android:textSize="30dp" />
+
+		 <Button
+			 android:id="@+id/button6"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_toRightOf="@id/button5"
+			 android:padding="10dp"
+			 android:text="@string/gears_4"
+			 android:textSize="30dp" />
+
+		 <Button
+			 android:id="@+id/button7"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_toRightOf="@id/button6"
+			 android:padding="10dp"
+			 android:text="@string/gears_5"
+			 android:textSize="30dp" />
+
+		 <Button
+			 android:id="@+id/button8"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_toRightOf="@id/button7"
+			 android:padding="10dp"
+			 android:text="@string/gears_6"
+			 android:textSize="30dp" />
+
+		 <Button
+			 android:id="@+id/button9"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_toRightOf="@id/button8"
+			 android:padding="10dp"
+			 android:text="@string/gears_7"
+			 android:textSize="30dp" />
+	 </RelativeLayout>
+
+	 <Button
+		 android:id="@+id/btn_test"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content"
+		 android:layout_alignParentBottom="true"
+		 android:layout_alignParentRight="true"
+		 android:alpha="30"
+		 android:text="@string/debug_model"
+		 android:visibility="gone"
+		 android:textColor="#a7a7a7" />
+
+	 <TextView
+		 android:id="@+id/log_info"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content"
+		 android:layout_alignParentBottom="true"
+		 android:layout_toLeftOf="@id/btn_test"
+		 android:text="@string/print_debug_info"
+		 android:textColor="#797979"
+		 android:textSize="20sp"
+		 android:visibility="gone" />
+
+
+</RelativeLayout>

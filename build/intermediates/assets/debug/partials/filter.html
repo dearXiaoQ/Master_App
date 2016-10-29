@@ -1,0 +1,36 @@
+<ion-view ng-controller="filterController">
+    <div ng-cloak class="filterBody " >
+        <!--ng-class="{true:'left',false:'right'}[filterBodyShowClass]">-->
+        <div class="button button-full button-light" ng-click="curFilterAllSelectedClick()" style="margin-top: 0px">
+            <div style="float:left"><img ng-src="images/operateFiltrate.png" style="vertical-align: middle;"/>
+                {{curFilterItems.filterMenuType}}
+            </div>
+            <div style="float:right;padding-right: 5px">
+                <span ng-if="curFilterItems.allSelected">清空</span>
+                <span ng-if="!curFilterItems.allSelected">全选</span>
+            </div>
+        </div>
+        <ion-content cancelable='false' class="filterMenus" has-bouncing="true">
+            <div class="list">
+                <ion-item ng-click="curFilterSelectedClick(filterItem)" style="height: 60px;line-height: 60px" class="item "
+                          ng-repeat="filterItem in curFilterItems.filterTypeItems " ng-if="filterItem.item.length">
+                    <div>
+                        <span style="float: left;padding-left: 2em">{{filterItem.item}}</span>
+
+                        <div class="filterCheckBox">
+                            <input id="checkboxFiveInput+{{$index}}" type="checkbox" ng-model="filterItem.selected"
+                                   ng-click="curFilterSelectedClick(filterItem)"/>
+                            <label for="checkboxFiveInput+{{$index}}"></label>
+                        </div>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-content>
+        <div class="button-bar bar-stable">
+            <a class="button" ng-click="filterOkClick()"><img ng-src="images/operateOk.png"
+                                                              style="vertical-align: middle;padding-right: 5px"/>确定</a>
+            <a class="button" ng-click="filterCancelClick()"><img ng-src="images/operateCancel.png"
+                                                                  style="vertical-align: middle;padding-right: 5px"/>取消</a>
+        </div>
+    </div>
+</ion-view>

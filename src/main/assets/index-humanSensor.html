@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>hunman sensor</title>
+
+    <link href="styles/ionic.min.css" rel="stylesheet">
+    <style>
+        .yellow {
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body >
+<div  style="position: absolute;width: 100%;height: 100% ;font-size: 2em">
+    <div style="text-align: center;color: #B6B6B6;    position: absolute;
+    width: 50%;    height: 50%;    margin: auto;    left: 0;    right: 0;    top: 0;    bottom: 0;">
+        <img id="img" onclick="changeTemp()" src="images/man-stand.png" height="300px"/>
+        <div id="txt" style="color: #e77919 ;font-size: 1em; margin-top: 0.5em" >
+        </div>
+    </div>
+</div>
+<script type="application/javascript">
+    var sw =1;
+    function changeTemp (){
+        var src = 'images/man-move.png';
+
+        if(sw==2){
+            src = 'images/man-move.png';
+            document.getElementById('txt').innerHTML='有人活动';
+        }else{
+            src = 'images/man-stand.png';
+            document.getElementById('txt').innerHTML='没人活动';
+        }
+        document.getElementById('img').src = src;
+    }
+
+    function getHumanSensor( data){
+        console.log('getHumanSensor data :' + data);
+        sw=data;
+        changeTemp();
+    }
+</script>
+</body>
+</html>

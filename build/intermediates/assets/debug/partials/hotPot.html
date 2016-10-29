@@ -1,0 +1,75 @@
+<ion-view class="foodMenuBody" data-ng-init="foodMenuControllerInit()">
+    <div class="bar bar-header" style="border-bottom: 1px solid rgba(182, 182, 182, 0.51)">
+        <ion-scroll scrollbar-y="false" scrollbar-x="false" zooming="false"
+                    direction="x"  style="width: 100%;height: 46px">
+            <div class="row">
+                <div class="col" ng-repeat="item in menuObj.foodMenuItems" style="text-align: center;line-height: 16px "
+                     ng-click="menuListOnClick(item)" >
+                    <img ng-if="item.foodId!=menuObj.menuListSelectId" ng-src="{{item.icon}}0.png" style="width: 16px; vertical-align: bottom" />
+                    <img ng-if="item.foodId==menuObj.menuListSelectId" ng-src="{{item.icon}}1.png" style="width: 16px; vertical-align: bottom"/>
+                    <i  ng-class="{true:'primary-icon-color',false:''}[item.foodId==menuObj.menuListSelectId]">
+                        {{item.name}}</i>
+                    <!--<i style="border-right: 1px solid rgba(182, 182, 182, 0.51);float: right"></i>-->
+                </div>
+            </div>
+        </ion-scroll>
+    </div>
+    <ion-content  ng-style="setHeight" scrollbar-y="false" zooming="false"
+                 direction="y" has-bouncing="true" delegate-handle="foodMenuScrollHandle" style="margin-top: 42px">
+        <ion-refresher
+                pulling-text="下拉刷新..."
+                on-refresh="doRefresh()"
+                spinner="android">
+        </ion-refresher>
+        <div class="list">
+            <div ng-repeat="item in menuObj.foodMenuItems">
+                <div class="item item-divider"  id="{{item.foodId}}">
+                    {{item.name}}
+                </div>
+                <div ng-if="subItem.count>0 " class="item item-thumbnail-left"
+                     ng-repeat="subItem in item.typeId">
+                    <img ng-src="{{subItem.icon}}"/>
+
+                    <!--<p>&nbsp</p>-->
+
+                    <h2>{{subItem.name}}</h2>
+
+                    <p>{{subItem.weight}}g</p>
+                    <!--<p>{{subItem.descriptions}}</p>-->
+                    <p style="color: red">体验价&nbsp 0 &nbsp 元</p>
+
+                    <div class="menuCheckBox">
+                        <input id="checkboxInput+{{$index}}+{{item.foodId}}" type="checkbox" ng-model="subItem.selected"
+                               ng-click="onMenuCheckSelectClick(subItem)"/>
+                        <label for="checkboxInput+{{$index}}+{{item.foodId}}"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div style="margin-top: 20px; clear: both" ng-repeat="item in menuObj.foodMenuItems" class="list"-->
+             <!--ng-if="item.foodId==menuObj.menuListSelectId">-->
+            <!--<div ng-if="item.count==0" style="margin-top: 50%; text-align: center;font-size: 1.2em" class="three-text-color ">-->
+                <!--卖光了，看看别的吧！<br>也可以下拉，可能有惊喜噢！-->
+            <!--</div>-->
+            <!--<div ng-if="subItem.count>0 " class="item item-thumbnail-left"-->
+                 <!--ng-repeat="subItem in item.typeId">-->
+                <!--<img ng-src="{{subItem.icon}}"/>-->
+
+                <!--&lt;!&ndash;<p>&nbsp</p>&ndash;&gt;-->
+
+                <!--<h2>{{subItem.name}}</h2>-->
+
+                <!--<p>{{subItem.weight}}g</p>-->
+                <!--<p>{{subItem.descriptions}}</p>-->
+                <!--<p style="color: red">体验价&nbsp 0 &nbsp 元</p>-->
+
+                <!--<div class="menuCheckBox">-->
+                    <!--<input id="checkboxInput+{{$index}}+{{item.foodId}}" type="checkbox" ng-model="subItem.selected"-->
+                           <!--ng-click="onMenuCheckSelectClick(subItem)"/>-->
+                    <!--<label for="checkboxInput+{{$index}}+{{item.foodId}}"></label>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div ng-style="setHeight"></div>
+    </ion-content>
+</ion-view>

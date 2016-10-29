@@ -1,0 +1,71 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/network_association"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+	 android:background="#ffffff">
+
+	 <include layout="@layout/activity_header" />
+
+
+	 <RelativeLayout
+		 android:layout_gravity="center"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content">
+		 <Button
+			 android:id="@+id/button1"
+			 android:padding="10dp"
+			 android:textSize="30dp"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:text="@string/open"/>
+		 <Button
+			 android:padding="10dp"
+			 android:textSize="30dp"
+			 android:id="@+id/button2"
+			 android:layout_toRightOf="@id/button1"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:text="@string/open"/>
+		 <Button
+			 android:padding="10dp"
+			 android:textSize="30dp"
+			 android:id="@+id/button3"
+			 android:layout_toRightOf="@id/button2"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:text="@string/slow_wind"/>
+		 <Button
+			 android:padding="10dp"
+			 android:textSize="30dp"
+			 android:id="@+id/button4"
+			 android:layout_toRightOf="@id/button3"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:text="@string/fast_wind"/>
+		 <Button
+			 android:padding="10dp"
+			 android:textSize="30dp"
+			 android:id="@+id/button5"
+			 android:layout_toRightOf="@id/button4"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:text="@string/close_light"/>
+		 <Button
+			 android:padding="10dp"
+			 android:textSize="30dp"
+			 android:id="@+id/button6"
+			 android:layout_toRightOf="@id/button5"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:text="@string/open_light"/>
+
+	 </RelativeLayout>
+
+	 <WebView
+		 android:id="@+id/webview"
+		 android:layout_width="match_parent"
+		 android:layout_height="match_parent" />
+
+</LinearLayout>
