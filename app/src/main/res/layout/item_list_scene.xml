@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:id="@+id/listview_root">
+
+        <TextView
+            android:id="@+id/tv_scene_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxWidth="350dp"
+            android:ellipsize="end"
+            android:text="listName"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:layout_below="@id/tv_scene_name"
+            android:id="@+id/tv_scene_statu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Statu"
+            android:textSize="16sp"
+            android:textColor="#ababab"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/link"/>
+
+</RelativeLayout>

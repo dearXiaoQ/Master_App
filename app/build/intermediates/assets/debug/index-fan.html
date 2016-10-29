@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app = 'indexApp'>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>智能风扇</title>
+    <!--<link href="styles/ionic.min.css" rel="stylesheet">-->
+    <link href="styles/app.css" rel="stylesheet">
+    <!--<script src="//cdn.bootcss.com/angular.js/1.5.7/angular.min.js"></script>-->
+    <script src="scripts/libs/ionic.bundle.min.js"></script>
+</head>
+<body ng-controller="fanController">
+    <div id="fan" ng-click=" fanClick()">
+        <div class="oscillator " >
+            <ul class="guard">
+                <li class="frame"></li>
+                <li class="cir1"></li>
+                <li class="cir2"></li>
+                <li class="cir3"></li>
+                <li class="cir4"></li>
+                <li class="cir5"></li>
+                <li class="cir6"></li>
+                <li class="bar1"></li>
+                <li class="bar2"></li>
+            </ul>
+            <ul class="blades "  ng-class="{true:'play',false:''}[fanPlay]">
+                <li class="b1"></li>
+                <li class="b2"></li>
+                <li class="b3"></li>
+            </ul>
+            <ul class="motor"></ul>
+        </div>
+        <div class="base"></div>
+    </div>
+<script type="application/javascript">
+    var app = angular.module('indexApp', []);
+    app.controller('fanController',function($scope){
+        $scope.fanPlay =false;
+//        myObject.controlLight($scope.fanPlay);
+        $scope.fanClick = function(){
+            $scope.fanPlay = !$scope.fanPlay;
+//            myObject.controlLight($scope.fanPlay);
+        }
+    });
+    function getFanStatus(data){
+
+    }
+</script>
+</body>
+</html>

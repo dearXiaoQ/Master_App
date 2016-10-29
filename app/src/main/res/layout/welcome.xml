@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:text="@string/select_can_connect_device"
+        android:textSize="18sp" />
+
+
+    <ListView
+        android:id="@+id/scanListView"
+        android:layout_width="500dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/white_bg_frame"
+        android:maxHeight="350dp" />
+
+    <ProgressBar
+        android:id="@+id/pbar_Welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/buttonScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_common_selector"
+        android:text="@string/scan_connect"
+        android:textColor="#8A8A8A"
+        android:textSize="20sp" />
+
+</LinearLayout>

@@ -1,0 +1,1 @@
+The project can be opened by selecting "Import project (Eclipse ADT, Gradle, etc.)" in Android Studio.

@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\device_icon_press.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\device_icon_press.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\button_scan_disabled.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\button_scan_disabled.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_navigation_expand_more.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\ic_navigation_expand_more.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\scan_button_style.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\scan_button_style.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_alert.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\ic_alert.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\button_scan_pressed.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\button_scan_pressed.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\recipe_icon_press.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\recipe_icon_press.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\button_scan_normal.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\button_scan_normal.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\wheel_val.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\wheel_val.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\common_full_open_on_phone.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\8.1.0\\res\\drawable-xhdpi\\common_full_open_on_phone.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\add_device_press.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\add_device_press.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\add_device_normal.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\add_device_normal.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_update.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\ic_update.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_navigation_expand_less.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-xhdpi\\ic_navigation_expand_less.png"
+    }
+]

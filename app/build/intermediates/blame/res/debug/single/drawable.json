@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_scene.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\tab_scene.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_selector.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_selector.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\border.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\border.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\add_sence.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\add_sence.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\float_button_bg.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\float_button_bg.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_add_sence_selectior.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_add_sence_selectior.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_sence_log.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_sence_log.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\repeat_bg.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\repeat_bg.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_filter.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\menu_filter.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\sence_log.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\sence_log.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_save.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\menu_save.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\guide_btn_bg.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\guide_btn_bg.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_device.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\tab_device.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_lixian.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\ic_lixian.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\guide_point_focus.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\guide_point_focus.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_common_selector.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_common_selector.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\white_bg_frame.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\white_bg_frame.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\header_shadow.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\header_shadow.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\debug.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\debug.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\drawer_shadow.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\drawer_shadow.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_download.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\menu_download.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ico_bg.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\ico_bg.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_recipe.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\tab_recipe.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\guide_point_normal.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\guide_point_normal.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\background_notification.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\background_notification.xml"
+    }
+]

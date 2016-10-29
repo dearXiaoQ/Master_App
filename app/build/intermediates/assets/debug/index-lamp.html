@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="index">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>智能电灯</title>
+
+    <link href="styles/ionic.min.css" rel="stylesheet">
+    <!--<link href="styles/app.css" rel="stylesheet">-->
+    <script src="scripts/libs/ionic.bundle.min.js"></script>
+    <script src="scripts/libs/httpModule.js"></script>
+    <script src="scripts/app.js"></script>
+    <style>
+        .yellow{
+            color:#e77919;
+        }
+    </style>
+</head>
+<!--style="background: url(./images/bg.jpg)repeat-->
+<body ng-cloak >
+<div  ng-controller="orderController" style="position: absolute;width: 100%;height: 100% ;font-size: 2em" >
+        <div ng-if="!order.orderItem.length" style="text-align: center;color: #B6B6B6;    position: absolute;
+    width: 50%;    height: 50%;    margin: auto;    left: 0;    right: 0;    top: 0;    bottom: 0;">
+            <i class="icon " ng-class="{true: 'ion-ios-lightbulb yellow', false: 'ion-ios-lightbulb-outline'}[isActive]" ng-click="lightClick()" style="font-size: 13em;"></i>
+        </div>
+</div>
+<script>
+    function getLampStatus(data){
+        console.log('getLampStatus : '+ data);
+    }
+</script>
+</body>
+</html>

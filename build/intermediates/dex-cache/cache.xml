@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="a9d5d42e2242049763d3da54938048b68e3ebf39">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_f51f3c52ccc2e36a194cfbd265a59b5870a9ffc8\classes.dex" />
+    </item>
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d80f4ddb9f3267993d7819a2b18c854ae1a295ab">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_d9a1d283bb4b89756f3d68879d6a2794eab23f3f\classes.dex" />
+    </item>
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-22.2.0_77b6b39c0034ffa252fa34ed24db8a011a8a68a5\classes.dex" />
+    </item>
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\android-support-v4.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="3e4e879d0b3dc11f2feb3f55e77e3b5bd82c4a28">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\android-support-v4_7cb242df2717526770daff80953c4ddd13a142ba\classes.dex" />
+    </item>
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.1.0_18738ac488a90ecac733b8e126df5a8b92be411b\classes.dex" />
+    </item>
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.1.0_0dacf6023aaee1b1a037efde277d0217b69d5c17\classes.dex" />
+    </item>
+    <item
+        jar="D:\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-22.2.0_8565d8a53cd68adacfad143f18f5794ed6394c6b\classes.dex" />
+    </item>
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-22.2.0_021cee2eae2f295df0eb94550cf9acd1a56689c5\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mars\.gradle\caches\modules-2\files-2.1\com.madgag.spongycastle\prov\1.51.0.0\6755081df770180856ca48694b40cd34c2208128\prov-1.51.0.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6755081df770180856ca48694b40cd34c2208128">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\prov-1.51.0.0_fc4c0657fb2bcbc1251f19348518515899627b68\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mars\.gradle\caches\modules-2\files-2.1\com.madgag.spongycastle\core\1.51.0.0\f642963312ea0e615ad65f28adc5a5b3a2a0862\core-1.51.0.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="0f642963312ea0e615ad65f28adc5a5b3a2a0862">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\core-1.51.0.0_2bcca7a591053da3133e85beb48f41549260ce42\classes.dex" />
+    </item>
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\xUtils-2.6.14.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f10c51f3e0732fdeefe6e104279a58e275879b6c">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\xUtils-2.6.14_f307b90e1328cc76a689b9052f3b3ca89f44d55a\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mars\.gradle\caches\modules-2\files-2.1\com.madgag.spongycastle\pkix\1.51.0.0\40a445852ca58187fc616e3a8b42de463bf14b8b\pkix-1.51.0.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="40a445852ca58187fc616e3a8b42de463bf14b8b">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\pkix-1.51.0.0_1736ed4146b50ff0652125dced2290f6d6963415\classes.dex" />
+    </item>
+    <item
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\gson-2.2.4.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\gson-2.2.4_db656a6e7aae65bfa792f402d5d73a5584bd53d8\classes.dex" />
+    </item>
+
+</items>

@@ -1,0 +1,150 @@
+<ion-view ng-cloak ng-controller="menuListController" data-ng-init="menuListControllerInit()">
+    <div ng-cloak
+         ng-style="setMenuListMainHeight"
+         class="cookMenuController active"
+         ng-class="{'middle ':cookMenuControllerShowClass==1,
+            'top ':cookMenuControllerShowClass==2}">
+        <div class="header">
+            <div class="productIcon" ng-click="productIconClick()">
+                <img  ng-src="{{productIcon}}">
+                <img ng-src="{{$root.curWorkStatusImg}}" style="width: 30px;height: 30px;position: absolute;right: 12px;top:9px">
+            </div>
+            <p>{{productInfo}}</p>
+        </div>
+        <div class="mainMenuTitle">
+            <!--<div class="h2 title" ><span class="icon ion-arrow-up-b"></span></div>-->
+            <div ng-if="$root.devOffLine" style="width: 100%;height: 100%;position: absolute;background: rgba(0,0,0,0.6);z-index: 11">
+                <P style="color:white;font-size: 1.5em;margin-top: 10%">设备连接中，请稍后...</P>
+            </div>
+            <div class="row">
+                <div class="col" ng-click="menuListBarColClick(searchMenuSelectItem.MoreMenuSelect)">
+                    <table>
+                        <tr>
+                            <td class="fontBase"
+                                ng-class="{false:'',true:'select'}[searchMenuSelect==searchMenuSelectItem.MoreMenuSelect]"
+                            >菜谱
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="band"
+                                ng-class="{false:'',true:'select'}[searchMenuSelect==searchMenuSelectItem.MoreMenuSelect]"
+                            ></td>
+                        </tr>
+                    </table>
+                </div>
+                <div ng-if="hasDiy" class="col" ng-click="menuListBarColClick(searchMenuSelectItem.diyMenuSelect)">
+                    <table>
+                        <tr>
+                            <td class="fontBase"
+                                ng-class="{false:'',true:'select'}[searchMenuSelect==searchMenuSelectItem.diyMenuSelect]"
+                            >DIY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="band"
+                                ng-class="{false:'',true:'select'}[searchMenuSelect==searchMenuSelectItem.diyMenuSelect]"
+                            ></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--has-bouncing="true"-->
+        <ion-scroll lazy-scroll ng-style="setMenuListHeight" has-bouncing="true" on-drag="onDragUp()" scrollbar-y="false" zooming="false"
+                    direction="y" class="cookMenuScrollBody" delegate-handle="cookMenuScroll">
+            <!--diy部分，只有当diy被选中时才显示-->
+            <div ng-if="searchMenuSelect==searchMenuSelectItem.diyMenuSelect">
+                <z-diy></z-diy>
+
+
+                <!--diy下方的直接显示的按钮组-->
+                <div ng-cloak class="diyCommControllerStart card">
+                    <div>
+                        <button class="button button-block button-positive" ng-click="commButtonItem.startItem.menusFun()">
+                            <img ng-src="{{commButtonItem.startItem.menusIcon}}" style="vertical-align: middle;width: 24px">
+                            {{commButtonItem.startItem.menusText}}
+                        </button>
+                    </div>
+                    <div class="button-bar bar-stable">
+                        <a class="button" ng-repeat="menu in commButtonItem.commButtonItem" ng-click="menu.menusFun()"
+                           style="color:#1FB4FF ">
+                            <img ng-src="{{menu.menusIcon}}" style="vertical-align: middle;width: 24px">
+                            {{menu.menusText}}
+                        </a>
+                    </div>
+                </div>
+                <!--diy下方的直接显示的按钮组-->
+
+
+            </div>
+            <!--diy部分，只有当diy被选中时才显示-->
+            <!--菜谱部分，只有当菜谱被选中时才显示-->
+
+
+            <div class="favoriteMenu" ng-if="searchMenuSelect==searchMenuSelectItem.MoreMenuSelect">
+                <!--<div class="row" ng-repeat = "menuItemRow in favoriteMenuItems">-->
+                <div class="col col-33" ng-repeat="menuItemCol in menuList | orderBy:'priorityNum'" style="float:left">
+                    <div class="card" ng-click="menuItemColSelect(menuItemCol)"
+                         ng-class="{true:'select',false:''}[menuItemCol.menuId == menusSelectId]">
+                        <img image-lazy-src="{{menuItemCol.menuType}}"  class="menuItemImgInLine" image-lazy-distance-from-bottom-to-load="100"/>
+                        <img ng-src="images/menuPicSaucer.png" ng-if="!menuItemCol.isDiy&&!menuItemCol.isFavorite"
+                             class="menuItemImgOutLine">
+                        <img ng-src="images/menuFavoritesSaucer.png" ng-if="menuItemCol.isFavorite"
+                             class="menuItemImgOutLine">
+                        <img ng-src="images/menuDiySaucer.png" ng-if="menuItemCol.isDiy&&!menuItemCol.isFavorite"
+                             class="menuItemImgOutLine">
+
+                        <p>{{menuItemCol.menuText}}</p>
+                    </div>
+                </div>
+                <!--</div>-->
+            </div>
+            <!-- TODO:2014-12-28 vijanny 上拉加载-->
+            <ion-infinite-scroll
+                    ng-if="needMoreData&&searchMenuSelect==searchMenuSelectItem.MoreMenuSelect"
+                    on-infinite="loadMoreMenu()"
+                    distance="1%">
+            </ion-infinite-scroll>
+
+        </ion-scroll>
+
+        <div class="headerMark"></div>
+        <div ng-style="setFooterMarkStyle" class="footerMark" ng-if="searchMenuSelect==searchMenuSelectItem.MoreMenuSelect"></div>
+        <div class="cookMenuFooterButton button-bar bar-stable"
+             ng-if="searchMenuSelect==searchMenuSelectItem.MoreMenuSelect&&hasFilterBar">
+            <button class="button button-full button-light" ng-click="menuSortClick()"
+                    ng-if="hasSort">
+                <span ng-if="curSortItems==undefined">排序</span>
+                <span ng-repeat="item in curSortItems">{{item}}</span>
+            </button>
+            <button class="button button-full button-light" ng-click="filterStartUp()"
+                    ng-if="hasFilter">
+                <div style="float:left"><img ng-src="images/operateFiltrate.png" style="vertical-align: middle"/>
+                    <span ng-if="curFilterItems==undefined">筛选</span>
+                    <span ng-if="curFilterItems">当前{{curFilterItems.filterMenuType}}</span>
+                </div>
+                <div style="float:right">
+                    <span ng-if="curFilterItems==undefined">全部菜谱</span>
+                    <span ng-repeat="item in curFilterItems.filterTypeItems " ng-if="item.selected">{{item.item}}、</span>
+                    <img ng-src="images/rightangle.png" width="24px" style="vertical-align: middle"/>
+                </div>
+            </button>
+        </div>
+    </div>
+    <comm-button show="$root.commButtonShow" value="commButtonItem" call-back="commButtonCallBack()" ></comm-button>
+    <time-picker show="timePickerShow" value="timePackerValue" call-back="timePickerCallBack()" ></time-picker>
+
+    <div ng-cloak class="sortDialogBody" ng-if="sortDialogShowFlag" >
+        <div class="sortDialog">
+            <img ng-src="images/tipAleart.png">
+
+            <p style="font-size: 0.9em">请选择你要进行的排序</p>
+
+            <div class="list">
+                <a class="item" ng-repeat="item in sortItems.value" ng-click="sortOkClick(item)">{{item}}</a>
+                <a class="item" ng-click="sortCancelClick()">取消</a>
+            </div>
+        </div>
+    </div>
+</ion-view>
+

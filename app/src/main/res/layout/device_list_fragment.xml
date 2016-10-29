@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:clipChildren="false"
+    android:id="@+id/containLL"
+    >
+
+    <!-- <GridView
+         android:id="@+id/device_gv_list"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:gravity="center"
+         android:numColumns="3"
+         android:columnWidth="50dp"
+         android:horizontalSpacing="5dp"
+         android:verticalSpacing="10dp"
+         android:stretchMode="columnWidth">
+
+     </GridView>
+ -->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/deviceVP"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="100dp"
+        android:clipChildren="false"
+        >
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

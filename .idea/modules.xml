@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CSRmeshLibrary/CSRmeshLibrary.iml" filepath="$PROJECT_DIR$/CSRmeshLibrary/CSRmeshLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gmri-master-App-Demo.iml" filepath="$PROJECT_DIR$/gmri-master-App-Demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SlidingmenuLibrary/slidingmenuLibrary.iml" filepath="$PROJECT_DIR$/SlidingmenuLibrary/slidingmenuLibrary.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:paddingTop="50dp"
+    android:paddingBottom="50dp"
+    android:orientation="horizontal"
+    android:id="@+id/LL"
+    tools:context="com.csr.masterapp.MainActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/pic1"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:src="@drawable/bf1"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/pic1"
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/sirloin"
+            android:textSize="30sp"
+            android:textColor="#000000"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/pic2"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:src="@drawable/xr1"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/pic2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/stewed_pear_with_white_fungus_and_sweet_scented_osmanthus"
+            android:textSize="30sp"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
+
+</LinearLayout>
