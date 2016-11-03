@@ -983,9 +983,10 @@ public class SlidingMenu extends RelativeLayout {
 	/* (non-Javadoc)
 	 * @see android.view.ViewGroup#fitSystemWindows(android.graphics.Rect)
 	 */
+	//fitSystemWindows (Rect insets)
 	@SuppressLint("NewApi")
 	@Override
-	protected boolean fitSystemWindows(Rect insets) {
+	protected boolean fitSystemWindows (Rect insets) {
 		int leftPadding = insets.left;
 		int rightPadding = insets.right;
 		int topPadding = insets.top;
