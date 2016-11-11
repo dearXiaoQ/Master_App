@@ -50,6 +50,7 @@ import com.csr.masterapp.entities.DeviceType;
 import com.csr.masterapp.entities.GroupDevice;
 import com.csr.masterapp.entities.Setting;
 import com.csr.masterapp.entities.SingleDevice;
+import com.csr.masterapp.entities.User;
 import com.csr.masterapp.fragment.ContentFragment;
 import com.csr.masterapp.fragment.MenuFragment;
 import com.csr.masterapp.interfaces.AssociationListener;
@@ -83,6 +84,13 @@ import com.csr.mesh.SwitchModelApi;
 import com.csr.mesh.sensor.DesiredAirTemperature;
 import com.csr.mesh.sensor.InternalAirTemperature;
 import com.csr.mesh.sensor.SensorValue;
+import com.gizwits.gizwifisdk.api.GizWifiSDK;
+import com.gizwits.gizwifisdk.enumration.GizEventType;
+import com.gizwits.gizwifisdk.enumration.GizWifiErrorCode;
+import com.gizwits.gizwifisdk.listener.GizWifiSDKListener;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.lidroid.xutils.HttpUtils;
@@ -110,7 +118,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends SlidingFragmentActivity implements RecipeListFragment.RecipeCallback, DeviceController, SceneListFragment.CallbackActivity,SceneController, NotificationFragment.NotificationFragmentCallbacks {
+public class MainActivity extends SlidingFragmentActivity implements RecipeListFragment.RecipeCallback, DeviceController, SceneListFragment.CallbackActivity, SceneController, NotificationFragment.NotificationFragmentCallbacks {
 
     public static Context mContext;
 
@@ -119,7 +127,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     public static Resources mResources;
 
     //是否是菜谱中电磁炉发送的数据
-    public static boolean  RECIPE_IND_SEND_DATA = false;
+    public static boolean RECIPE_IND_SEND_DATA = false;
 
     //调试模式
     public static boolean DEBUG_MODLE = false;
@@ -130,15 +138,21 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
 
     private static final String TAG_CONTENT = "content";
     private static final String TAG_MENU = "menu";
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     public static Context getContext() {
         return mContext;
     }
+
     public static MainActivity mMainActivity;
 
     private static final String TAG = "MainActivity";
 
-    /*package*/ static final int DEVICE_LOCAL_ADDRESS =  0x8000;
+    /*package*/ static final int DEVICE_LOCAL_ADDRESS = 0x8000;
     /*package*/ static final int ATTENTION_DURATION_MS = 20000;
     /*package*/ static final int ATTRACTION_DURATION_MS = 5000;
 
@@ -194,7 +208,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     private boolean mGroupSuccess = true;
 
     private ArrayList<Integer> mNewGroups = new ArrayList<Integer>();
-    private List <Integer> mGroupsToSend;
+    private List<Integer> mGroupsToSend;
     private int mLastActuatorMeshId = 0;
     private boolean mPendingDesiredTemperatureRequest = false;
 
@@ -218,7 +232,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
 
     private ContentFragment mNavListener;
 
-    private byte [] mData = new byte[DATA_BUFFER_SIZE];
+    private byte[] mData = new byte[DATA_BUFFER_SIZE];
 
     // Keys used to save settings
     private static final String SETTING_LAST_ID = "lastID";
@@ -252,12 +266,28 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     //重连机制的实现
     //   private boolean AGAIN_CONNECTION_DEVICE = false;
 
-    private boolean AGAIN_IS_SUCESS  = false;
+    private boolean AGAIN_IS_SUCESS = false;
 
     private static final int AGAIN_SUCESS = 300;
 
     private static final int AGAIN_FAILED = 301;
 
+    private User loginUser = null;
+
+    //实例化监听器
+    GizWifiSDKListener wifiSdkListener = new GizWifiSDKListener() {
+
+        //实现手机号注册用户
+
+        @Override
+        public void didRegisterUser(GizWifiErrorCode result, String uid, String token) {
+            if (result == GizWifiErrorCode.GIZ_SDK_SUCCESS) {
+                // 注册成功，处理注册成功的逻辑
+            } else {
+                // 注册失败，处理注册失败的逻辑
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -265,12 +295,21 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         mContext = getApplicationContext();
         mMainActivity = MainActivity.this;
         mResources = this.getResources();
-        //数据库，蓝牙
+        // 数据库，蓝牙
         setData();
-        //侧滑菜单
+        // 侧滑菜单
         setView();
 
+
         initFragment();
+
+        // 注册监听器
+        GizWifiSDK.sharedInstance().setListener(wifiSdkListener);
+        // 调用SDK的手机号注册借口
+        GizWifiSDK.sharedInstance().registerUser("", "");
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void setView() {
@@ -285,6 +324,12 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
 
     private void setData() {
         //数据库初始化
+/*
+        Bundle bundle = getIntent().getBundleExtra("loginInfo");
+        loginUser = (User) bundle.get("loginInfo");
+        Log.i("loginUser", "loginUser = " + loginUser);
+*/
+
         mDeviceStore = new DeviceStore(this);
         mStreams = mDeviceStore.getDeviceStream();
         setContentView(R.layout.content_container);
@@ -293,7 +338,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         //绑定蓝牙服务
         Intent intent = getIntent();
         mDevices = intent.getExtras().getParcelableArrayList(BluetoothDevice.EXTRA_DEVICE);
-        if (mDevices !=null && mDevices.get(0) != null) {   //启动服务连接蓝牙模块
+        if (mDevices != null && mDevices.get(0) != null) {   //启动服务连接蓝牙模块
             Intent bindIntent = new Intent(this, MeshService.class);
             bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
         }
@@ -307,8 +352,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         mService.disconnectBridge();
     }
 
@@ -320,7 +364,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             mService.setHandler(null);
             mMeshHandler.removeCallbacksAndMessages(null);
             unbindService(mServiceConnection);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -330,14 +374,13 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentByTag(TAG_CONTENT).getChildFragmentManager().findFragmentByTag("devices");
 
-     //   Log.d(TAG, "onKeyDown: " + manager.findFragmentByTag(TAG_CONTENT).getChildFragmentManager().findFragmentByTag("devices"));
-        if(fragment instanceof DeviceControlFragment){
-        //    Log.d(TAG, "onKeyDown: " + 123);
+        //   Log.d(TAG, "onKeyDown: " + manager.findFragmentByTag(TAG_CONTENT).getChildFragmentManager().findFragmentByTag("devices"));
+        if (fragment instanceof DeviceControlFragment) {
+            //    Log.d(TAG, "onKeyDown: " + 123);
             //GamesFragment.onKeyDown(keyCode, event);
             return false;
         }
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitBy2Click(); //调用双击退出函数
         }
         return false;
@@ -363,7 +406,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         }
     }
 
-    public void initFragment(){
+    public void initFragment() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         contentFragment = new ContentFragment();
@@ -395,8 +438,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         // try to cancel association.
         if (mAssociationTransactionId != -1) {
             mService.cancelTransaction(mAssociationTransactionId);
-        }
-        else {
+        } else {
             mNavListener.restorePosition();
         }
 
@@ -425,8 +467,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.notifier, mNotificationFragment);
                 ft.commitAllowingStateLoss();
-            }
-            else {
+            } else {
                 mNotificationFragment.setTitle(title);
                 mNotificationFragment.setSubTitle(subtitle);
             }
@@ -443,7 +484,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         if (mNavListener != null && mNavListener.getCurrentPosition() == SimpleNavigationListener.POSITION_GROUP_CONFIG) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_config, menu);
@@ -481,7 +522,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         String configuration = mDeviceStore.getDataBaseAsJson();
 
         // Create the temporal file within the private application folder,
-        tmpSharingFile = Utils.writeToSDFile(fileName,configuration);
+        tmpSharingFile = Utils.writeToSDFile(fileName, configuration);
 
         if (tmpSharingFile == null) {
             Toast.makeText(this, getString(R.string.error_share_configuration), Toast.LENGTH_SHORT).show();
@@ -492,7 +533,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tmpSharingFile));
-        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.share_configuration));
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_configuration));
         shareIntent.setType("file/*");
         startActivityForResult(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)), SHARING_RESULT_CODE);
     }
@@ -514,6 +555,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 // Try to get the last setting ID used.
                 SharedPreferences activityPrefs = getPreferences(Activity.MODE_PRIVATE);
                 int lastIdUsed = activityPrefs.getInt(SETTING_LAST_ID, Setting.UKNOWN_ID);
+                Log.i("lastIdUsed", " lastIdUsed = " + lastIdUsed);
                 restoreSettings(lastIdUsed);
 
                 connect();
@@ -548,7 +590,6 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     }
 
 
-
     /**
      * Handle messages from mesh service.
      */
@@ -563,8 +604,22 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     //菜谱界面的回调函数
     @Override
     public void onRecipeCallback(boolean isCallback) {
-     //   Log.i("RecipeCallback", "MainActiv 回调！");
+        //   Log.i("RecipeCallback", "MainActiv 回调！");
         contentFragment.hideMenuBtn();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+
     }
 
 
@@ -579,15 +634,17 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             MainActivity parentActivity = mActivity.get();
             switch (msg.what) {
 
-                case 500 :
+                case 500:
                     try {
                         parentActivity.finish();
-                    } catch (Exception e) {e.printStackTrace();}
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 case MeshService.MESSAGE_LE_CONNECTED: {
                     AGAIN_IS_SUCESS = true;
-                  //  Log.i("again", "设备已经连接!");
+                    //  Log.i("again", "设备已经连接!");
                     parentActivity.mConnectedDevices.add(msg.getData().getString(MeshService.EXTRA_DEVICE_ADDRESS));
                     if (!parentActivity.mConnected) {
                         parentActivity.onConnected();
@@ -595,7 +652,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     break;
                 }
                 case MeshService.MESSAGE_LE_DISCONNECTED: {
-                  //  Log.i("again", "收到MESSAGE_LE_DISCONNECTED");
+                    //  Log.i("again", "收到MESSAGE_LE_DISCONNECTED");
                     int numConnections = msg.getData().getInt(MeshService.EXTRA_NUM_CONNECTIONS);
                     String address = msg.getData().getString(MeshService.EXTRA_DEVICE_ADDRESS);
 
@@ -615,8 +672,8 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                         AGAIN_IS_SUCESS = false;
                         parentActivity.mConnected = false;
                         Toast.makeText(parentActivity, mResources.getString
-                                (R.string.connect_alread_disconnected_please_again_connect),Toast.LENGTH_LONG).show();
-                        if(!isOpenTask) {
+                                (R.string.connect_alread_disconnected_please_again_connect), Toast.LENGTH_LONG).show();
+                        if (!isOpenTask) {
                             Timer mTimer = new Timer();
                             mTimer.schedule(new MyTask(), 1000);
 
@@ -632,14 +689,13 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     parentActivity.startActivityForResult(enableBtIntent, REQUEST_BT_RESULT_CODE);
                     break;
-                case MeshService.MESSAGE_TIMEOUT:{
+                case MeshService.MESSAGE_TIMEOUT: {
                     int expectedMsg = msg.getData().getInt(MeshService.EXTRA_EXPECTED_MESSAGE);
                     int id;
                     int meshRequestId;
                     if (msg.getData().containsKey(MeshService.EXTRA_UUIDHASH_31)) {
                         id = msg.getData().getInt(MeshService.EXTRA_UUIDHASH_31);
-                    }
-                    else {
+                    } else {
                         id = msg.getData().getInt(MeshService.EXTRA_DEVICE_ID);
                     }
                     meshRequestId = msg.getData().getInt(MeshService.EXTRA_MESH_REQUEST_ID);
@@ -687,7 +743,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     int deviceId = msg.getData().getInt(MeshService.EXTRA_DEVICE_ID);
                     String uuid = String.valueOf(msg.getData().getInt(MeshService.EXTRA_UUID));
                     int uuidHash = msg.getData().getInt(MeshService.EXTRA_UUIDHASH_31);
-                  //  Log.d(TAG, "New device associated with id " + String.format("0x%x", deviceId));
+                    //  Log.d(TAG, "New device associated with id " + String.format("0x%x", deviceId));
 
                     if (parentActivity.mDeviceStore.getDevice(deviceId) == null) {
                         // Save the device id with the UUID hash so that we can store the UUID hash in the device
@@ -696,7 +752,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
 
                         // We add the device with no supported models. We will update that once we get the info.
                         if (uuidHash != 0) {
-                            parentActivity.addDevice(deviceId,uuid, uuidHash, null, 0, false);
+                            parentActivity.addDevice(deviceId, uuid, uuidHash, null, 0, false);
                         }
 
                         // If we don't already know about this device request its model support.
@@ -743,7 +799,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                         if (parentActivity.mDeviceStore.getSingleDevice(deviceId).isModelSupported(BatteryModelApi.MODEL_NUMBER)) {
                             parentActivity.getBatteryState(parentActivity.mInfoListener);
                         } else if (parentActivity.mInfoListener != null) {
-                            parentActivity.mInfoListener.onDeviceInfoReceived(parentActivity.vid, parentActivity.pid, parentActivity.version, GroupAssignFragment.UNKNOWN_BATTERY_LEVEL,GroupAssignFragment.UNKNOWN_BATTERY_STATE, deviceId, true);
+                            parentActivity.mInfoListener.onDeviceInfoReceived(parentActivity.vid, parentActivity.pid, parentActivity.version, GroupAssignFragment.UNKNOWN_BATTERY_LEVEL, GroupAssignFragment.UNKNOWN_BATTERY_STATE, deviceId, true);
                         } else {
                             // shouldn't happen. Just in case for avoiding endless loops.
                             parentActivity.hideProgress();
@@ -759,9 +815,8 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     byte batteryState = msg.getData().getByte(MeshService.EXTRA_BATTERY_STATE);
 
 
-
                     if (parentActivity.mInfoListener != null) {
-                        parentActivity.mInfoListener.onDeviceInfoReceived(parentActivity.vid, parentActivity.pid, parentActivity.version, batteryLevel,batteryState, deviceId, true);
+                        parentActivity.mInfoListener.onDeviceInfoReceived(parentActivity.vid, parentActivity.pid, parentActivity.version, batteryLevel, batteryState, deviceId, true);
                     } else {
                         // shouldn't happen. Just in case for avoiding endless loops.
                         parentActivity.hideProgress();
@@ -876,24 +931,24 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     }
 
                     //接收数据
-                    parentActivity.storeAndNotifyNewSensorValue(value1,status,deviceId);
-                    parentActivity.storeAndNotifyNewSensorValue(value2,status,deviceId);
+                    parentActivity.storeAndNotifyNewSensorValue(value1, status, deviceId);
+                    parentActivity.storeAndNotifyNewSensorValue(value2, status, deviceId);
 
                 }
                 break;
                 case MeshService.MESSAGE_RECEIVE_BLOCK_DATA: {
                     //接收数据
                     int deviceId = msg.getData().getInt(MeshService.EXTRA_DEVICE_ID);
-                    byte [] data = msg.getData().getByteArray(MeshService.EXTRA_DATA);
+                    byte[] data = msg.getData().getByteArray(MeshService.EXTRA_DATA);
 
                     parentActivity.notifyUpDataIndData(deviceId, data);
-                    parentActivity.storeAndNotifyNewDataValue(deviceId,data);
+                    parentActivity.storeAndNotifyNewDataValue(deviceId, data);
                     break;
                 }
                 case MeshService.MESSAGE_RECEIVE_STREAM_DATA:
                     if (parentActivity.mDataListener != null) {
                         int deviceId = msg.getData().getInt(MeshService.EXTRA_DEVICE_ID);
-                        byte [] data = msg.getData().getByteArray(MeshService.EXTRA_DATA);
+                        byte[] data = msg.getData().getByteArray(MeshService.EXTRA_DATA);
                         int sqn = msg.getData().getInt(MeshService.EXTRA_DATA_SQN);
                         if (deviceId == parentActivity.mSendDeviceId && sqn + data.length < DATA_BUFFER_SIZE) {
                             System.arraycopy(data, 0, parentActivity.mData, sqn, data.length);
@@ -906,7 +961,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     break;
                 case MeshService.MESSAGE_RECEIVE_STREAM_DATA_END:
                     if (parentActivity.mDataListener != null) {
-                        int  deviceId = msg.getData().getInt(MeshService.EXTRA_DEVICE_ID);
+                        int deviceId = msg.getData().getInt(MeshService.EXTRA_DEVICE_ID);
                         if (deviceId == parentActivity.mSendDeviceId) {
                             parentActivity.mDataListener.dataReceived(deviceId, parentActivity.mData);
                         } else {
@@ -929,17 +984,16 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     private void notifyUpDataIndData(int deviceId, byte[] data) {
         if (deviceId == indDeviceId && data != null) {
 
-                if(mTemperatureListener != null) {
-                    mTemperatureListener.setIndData(data);
-                }
+            if (mTemperatureListener != null) {
+                mTemperatureListener.setIndData(data);
+            }
         }
     }
 
     /**
      * Called when a response is not seen to a sent command.
      *
-     * @param expectedMessage
-     *            The message that would have been received in the Handler if there hadn't been a timeout.
+     * @param expectedMessage The message that would have been received in the Handler if there hadn't been a timeout.
      */
     private void onMessageTimeout(int expectedMessage, int id, int meshRequestId) {
         switch (expectedMessage) {
@@ -967,7 +1021,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             case MeshService.MESSAGE_CONFIG_MODELS:
                 // If we couldn't find out the model support for the device then we have to report association failed.
                 deviceAssociated(false, getString(R.string.association_failed));
-                if (mInfoListener!= null) {
+                if (mInfoListener != null) {
                     mInfoListener.onDeviceConfigReceived(false);
                 }
                 break;
@@ -977,8 +1031,8 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 }
                 break;
             case MeshService.MESSAGE_BATTERY_STATE:
-                if (mInfoListener!= null) {
-                    mInfoListener.onDeviceInfoReceived(vid,pid,version, GroupAssignFragment.UNKNOWN_BATTERY_LEVEL,GroupAssignFragment.UNKNOWN_BATTERY_STATE, mSendDeviceId, true);
+                if (mInfoListener != null) {
+                    mInfoListener.onDeviceInfoReceived(vid, pid, version, GroupAssignFragment.UNKNOWN_BATTERY_LEVEL, GroupAssignFragment.UNKNOWN_BATTERY_STATE, mSendDeviceId, true);
                 }
                 break;
             case MeshService.MESSAGE_GROUP_NUM_GROUPIDS:
@@ -992,7 +1046,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 // that the device support, but the association was successful.
                 if (mDeviceIdtoUuidHash.size() > 0) {
 
-                    Device device =mDeviceStore.getDevice(mDeviceIdtoUuidHash.keyAt(0));
+                    Device device = mDeviceStore.getDevice(mDeviceIdtoUuidHash.keyAt(0));
                     mDeviceIdtoUuidHash.removeAt(0);
                     if (device != null) {
                         String name = device.getName();
@@ -1000,13 +1054,13 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                                 name == null ? "Device" : name + " " + getString(R.string.added),
                                 Toast.LENGTH_SHORT).show();
                     }
-                    deviceAssociated(true,null);
+                    deviceAssociated(true, null);
                 }
-                if (mInfoListener!= null) {
+                if (mInfoListener != null) {
                     mInfoListener.onDeviceConfigReceived(false);
                 }
                 if (mInfoListener != null) {
-                    mInfoListener.onDeviceInfoReceived(new byte[0],new byte[0],new byte[0],GroupAssignFragment.UNKNOWN_BATTERY_LEVEL,GroupAssignFragment.UNKNOWN_BATTERY_STATE, 0, false);
+                    mInfoListener.onDeviceInfoReceived(new byte[0], new byte[0], new byte[0], GroupAssignFragment.UNKNOWN_BATTERY_LEVEL, GroupAssignFragment.UNKNOWN_BATTERY_STATE, 0, false);
                 }
                 break;
         }
@@ -1015,33 +1069,31 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     /**
      * 接收场景数据
      *
-     * @param data
-     *              场景数据
-     * @param deviceId
-     *              设备id
+     * @param data     场景数据
+     * @param deviceId 设备id
      */
-    private void receiveSceneData(byte[] data, int deviceId){
+    private void receiveSceneData(byte[] data, int deviceId) {
 
         int receiveValue;
         SingleDevice dev = mDeviceStore.getSingleDevice(deviceId);
 
-        if(dev == null){
-          //  Log.d(TAG, "receiveSceneData: " + dev);
+        if (dev == null) {
+            //  Log.d(TAG, "receiveSceneData: " + dev);
             return;
         }
         int index = 0;//索引标志
-        for (DeviceStream stream : mStreams){
+        for (DeviceStream stream : mStreams) {
             //判断设备类型shortname，且设备类型不可控
-            if(stream.getShortname().equals(dev.getShortName().trim()) && stream.getType() == 0){
-                if(stream.getData_type() == 0 || (stream.getData_type() == 1 && stream.getMax_value() <= 127 && stream.getMin_value() >= -128)){
-                    receiveValue = (byte)(data[index] & 0xff);
-                    executeScene(receiveValue,deviceId);
+            if (stream.getShortname().equals(dev.getShortName().trim()) && stream.getType() == 0) {
+                if (stream.getData_type() == 0 || (stream.getData_type() == 1 && stream.getMax_value() <= 127 && stream.getMin_value() >= -128)) {
+                    receiveValue = (byte) (data[index] & 0xff);
+                    executeScene(receiveValue, deviceId);
                     index += 1;
                     Log.d(TAG, "readingSceneData: 一位" + receiveValue);
                 }
-                if(stream.getData_type() == 1 && (stream.getMax_value() >= 127 || stream.getMin_value() <= -128)){
+                if (stream.getData_type() == 1 && (stream.getMax_value() >= 127 || stream.getMin_value() <= -128)) {
                     receiveValue = (short) (((data[index] << 8) | data[index + 1] & 0xff));
-                    executeScene(receiveValue,deviceId);
+                    executeScene(receiveValue, deviceId);
                     index += 2;
                     Log.d(TAG, "readingSceneData: 两位" + receiveValue);
                 }
@@ -1052,23 +1104,21 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     /**
      * 判断，执行场景
      *
-     * @param receiveValue
-     *                  接收到的数据
-     * @param deviceId
-     *                  设备id
+     * @param receiveValue 接收到的数据
+     * @param deviceId     设备id
      */
-    public void executeScene (int receiveValue, int deviceId){
-        if(mScenes.size() != 0){
-            for (SceneModel scene : mScenes){
-                if(scene.getStatus() == 1){
-                    for(SceneItemModel condition : scene.getConditions()){
-                        Log.d(TAG, "secne-----------------------getStatus"+ condition.getDeviceId() +" --- "+ deviceId );
-                        Log.d(TAG, "storeAndNotifyNewSensorValue: condition" + condition.getComparison_opt()  + condition.getValue());
-                        if(condition.getDeviceId() == deviceId){
+    public void executeScene(int receiveValue, int deviceId) {
+        if (mScenes.size() != 0) {
+            for (SceneModel scene : mScenes) {
+                if (scene.getStatus() == 1) {
+                    for (SceneItemModel condition : scene.getConditions()) {
+                        Log.d(TAG, "secne-----------------------getStatus" + condition.getDeviceId() + " --- " + deviceId);
+                        Log.d(TAG, "storeAndNotifyNewSensorValue: condition" + condition.getComparison_opt() + condition.getValue());
+                        if (condition.getDeviceId() == deviceId) {
                             //满足任一条件
-                            if((condition.getComparison_opt().equals("") && condition.getValue() == receiveValue) ||
+                            if ((condition.getComparison_opt().equals("") && condition.getValue() == receiveValue) ||
                                     (condition.getComparison_opt().equals("<") && receiveValue < condition.getValue()) ||
-                                    (condition.getComparison_opt().equals(">") && receiveValue > condition.getValue()) ){
+                                    (condition.getComparison_opt().equals(">") && receiveValue > condition.getValue())) {
                                 executeTask(scene.getTasks());
                                 break;
                             }
@@ -1083,65 +1133,64 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     /**
      * 执行场景任务
      *
-     * @param taskList
-     *                  任务列表
+     * @param taskList 任务列表
      */
-    public void executeTask(List<SceneItemModel> taskList){
+    public void executeTask(List<SceneItemModel> taskList) {
 
-        for(SceneItemModel task : taskList){
+        for (SceneItemModel task : taskList) {
             SingleDevice device = (SingleDevice) getDevice(task.getDeviceId());
-            if(device == null){
+            if (device == null) {
                 Log.d(TAG, "executeTask: 没有找到场景的设备");
                 return;
             }
             String shortName = device.getShortName().trim();
 
             ArrayList<Byte> dataList = new ArrayList<>();
-            for (DeviceStream stream : mStreams){
-                if(shortName.equals(stream.getShortname()) && stream.getType() == 1){
-                    if(Objects.equals(stream.getStream_name(), task.getStream_name())){
-                        if(stream.getData_type() == 0 || (stream.getData_type() == 1 && stream.getMax_value() <= 127 && stream.getMin_value() >= -128)){
+            for (DeviceStream stream : mStreams) {
+                if (shortName.equals(stream.getShortname()) && stream.getType() == 1) {
+                    if (Objects.equals(stream.getStream_name(), task.getStream_name())) {
+                        if (stream.getData_type() == 0 || (stream.getData_type() == 1 && stream.getMax_value() <= 127 && stream.getMin_value() >= -128)) {
                             //一位
                             dataList.add((byte) ((task.getValue().shortValue()) & 0xff));
                         }
-                        if(stream.getData_type() == 1 && (stream.getMax_value() >= 127 || stream.getMin_value() <= -128)){
+                        if (stream.getData_type() == 1 && (stream.getMax_value() >= 127 || stream.getMin_value() <= -128)) {
                             //两位
                             short i = task.getValue().shortValue();
                             dataList.add((byte) ((i >>> 8) & 0xff));
                             dataList.add((byte) ((i) & 0xff));
                         }
-                    }else{
-                        dataList.add((byte)0xff);
+                    } else {
+                        dataList.add((byte) 0xff);
                     }
                 }
             }
             byte[] dataArray = new byte[dataList.size()];
-            for(int i=0; i<dataList.size(); i++){
-                dataArray[i] =  dataList.get(i);
+            for (int i = 0; i < dataList.size(); i++) {
+                dataArray[i] = dataList.get(i);
             }
             Log.d(TAG, "executeTask: " + task.getDeviceId() + "--" + bytesToHexString(dataArray));
-            setDesiredDataWithId(task.getDeviceId(),dataArray);
+            setDesiredDataWithId(task.getDeviceId(), dataArray);
         }
     }
 
-    public void executeTask2(List<SceneItemModel> taskList){
-        for(SceneItemModel task : taskList){
+    public void executeTask2(List<SceneItemModel> taskList) {
+        for (SceneItemModel task : taskList) {
         }
     }
 
 
-    private void storeAndNotifyNewDataValue(int deviceId,byte[] data){
+    private void storeAndNotifyNewDataValue(int deviceId, byte[] data) {
         if (data == null) return;
-        if (mTemperatureListener !=null && deviceId == mSendDeviceId){
+        if (mTemperatureListener != null && deviceId == mSendDeviceId) {
             mTemperatureListener.setDesiredData(data);
         }
         //场景
         mInitData.put(deviceId, data);
-        receiveSceneData(data,deviceId);
+        receiveSceneData(data, deviceId);
 
     }
 
-    private void storeAndNotifyNewSensorValue (SensorValue value, TemperatureStatus status, int deviceId) {
+    private void storeAndNotifyNewSensorValue(SensorValue value, TemperatureStatus status, int deviceId) {
 
         if (value == null) return;
 
@@ -1153,28 +1202,28 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
 
             String deviceStatu = bytesToHexString(value.getValue());
 
-            Log.d(TAG, "接收的值: " +"（" + bytesToHexString(value.getValue()) +  "）--设备id：" +deviceId + "--发送的设备：" + mSendDeviceId);
-            Log.d(TAG, "接收的值: " +"（" + bytesToInit(value.getValue()) +  "）--设备id：" +deviceId + "--发送的设备：" + mSendDeviceId);
+            Log.d(TAG, "接收的值: " + "（" + bytesToHexString(value.getValue()) + "）--设备id：" + deviceId + "--发送的设备：" + mSendDeviceId);
+            Log.d(TAG, "接收的值: " + "（" + bytesToInit(value.getValue()) + "）--设备id：" + deviceId + "--发送的设备：" + mSendDeviceId);
             Log.d(TAG, "接收的温度tempCelsius:" + tempCelsius);
             //Toast.makeText(getApplicationContext(),"十六进制格式温度" + deviceStatu + " ---> 十进制温度" + tempCelsius ,Toast.LENGTH_SHORT).show();
 
             status.setCurrentTemperature(tempCelsius);
             mTemperatureStatus.put(deviceId, status);
 
-            int receiveValue =  (int)tempCelsius;
+            int receiveValue = (int) tempCelsius;
 
             //场景执行代码
-            if(mScenes.size() != 0){
-                for (SceneModel scene : mScenes){
-                    if(scene.getStatus() == 1){
-                        for(SceneItemModel condition : scene.getConditions()){
-                            Log.d(TAG, "secne-----------------------getStatus"+ condition.getDeviceId() +" --- "+ deviceId );
-                            Log.d(TAG, "storeAndNotifyNewSensorValue: condition" + condition.getComparison_opt()  + condition.getValue());
-                            if(condition.getDeviceId() == deviceId){
+            if (mScenes.size() != 0) {
+                for (SceneModel scene : mScenes) {
+                    if (scene.getStatus() == 1) {
+                        for (SceneItemModel condition : scene.getConditions()) {
+                            Log.d(TAG, "secne-----------------------getStatus" + condition.getDeviceId() + " --- " + deviceId);
+                            Log.d(TAG, "storeAndNotifyNewSensorValue: condition" + condition.getComparison_opt() + condition.getValue());
+                            if (condition.getDeviceId() == deviceId) {
                                 //满足任一条件
-                                if( (condition.getComparison_opt().equals("") && condition.getValue() == receiveValue) ||
+                                if ((condition.getComparison_opt().equals("") && condition.getValue() == receiveValue) ||
                                         (condition.getComparison_opt().equals("<") && receiveValue < condition.getValue()) ||
-                                        (condition.getComparison_opt().equals(">") && receiveValue > condition.getValue()) ){
+                                        (condition.getComparison_opt().equals(">") && receiveValue > condition.getValue())) {
                                     executeTask2(scene.getTasks());
                                     break;
                                 }
@@ -1190,10 +1239,9 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             if (mTemperatureListener != null && deviceId == mSendDeviceId) {
                 mTemperatureListener.setCurrentTemperature(bytesToInit(value.getValue()));
                 mTemperatureListener.setCurrentStatus(String.valueOf(bytesToInit(value.getValue())));
-                Log.d(TAG, "接收的值是: " +"（---------------------------------------" + deviceStatu);
+                Log.d(TAG, "接收的值是: " + "（---------------------------------------" + deviceStatu);
             }
-        }
-        else if (value instanceof DesiredAirTemperature) {
+        } else if (value instanceof DesiredAirTemperature) {
             double tempCelsius = ((DesiredAirTemperature) value).getCelsiusValue();
             status.setDesiredTemperature(tempCelsius);
             status.setDesiredTemperatureConfirmed(true);
@@ -1207,7 +1255,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         }
     }
 
-    public static String bytesToHexString(byte[] src){
+    public static String bytesToHexString(byte[] src) {
         StringBuilder stringBuilder = new StringBuilder("");
         if (src == null || src.length <= 0) {
             return null;
@@ -1223,17 +1271,18 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         return stringBuilder.toString();
     }
 
-    public static int bytesToInit(byte[] src){
+    public static int bytesToInit(byte[] src) {
         int temp = 0;
-        temp = src[1]&0xff;
+        temp = src[1] & 0xff;
         temp <<= 8;
-        temp |= src[0]&0xff;
-        if((src[1]&0x80) == 0x80){
+        temp |= src[0] & 0xff;
+        if ((src[1] & 0x80) == 0x80) {
             temp |= 0x80000000;
             temp &= 0xffff7fff;
         }
         return temp;
     }
+
     /**
      * Send group assign messages to the currently selected device using the groups contained in mNewGroups.
      */
@@ -1255,8 +1304,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     if (foundIndex > -1) {
                         // The device is already a member of this group so remove it from the list of groups to add.
                         mNewGroups.remove(foundIndex);
-                    }
-                    else {
+                    } else {
                         // The device should no longer be a member of this group, so set that index to -1 to flag
                         // that a message must be sent to update this index.
                         mGroupsToSend.set(i, -1);
@@ -1275,8 +1323,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                         mNewGroups.remove(0);
                         commandSent = true;
                         sendGroupCommands(mSendDeviceId, i, newGroup);
-                    }
-                    else if (groupId == -1) {
+                    } else if (groupId == -1) {
                         commandSent = true;
                         sendGroupCommands(mSendDeviceId, i, 0);
                     }
@@ -1289,8 +1336,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     mGroupAckListener.groupsUpdated(mSendDeviceId, true, getString(R.string.group_no_changes));
                 }
             }
-        }
-        else {
+        } else {
             // Not enough groups supported on device.
             if (mGroupAckListener != null) {
                 mGroupAckListener.groupsUpdated(mSendDeviceId, false,
@@ -1306,22 +1352,19 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
 
         if (dev.isModelSupported(LightModelApi.MODEL_NUMBER) && dev.getNumSupportedGroups(LightModelApi.MODEL_NUMBER) != 0) {
             mGroupAcksWaiting++;
-            GroupModelApi.setModelGroupId(deviceId, LightModelApi.MODEL_NUMBER,index, 0, group );
+            GroupModelApi.setModelGroupId(deviceId, LightModelApi.MODEL_NUMBER, index, 0, group);
             // If a light also supports power then set groups for that too.
             if (dev.isModelSupported(LightModelApi.MODEL_NUMBER) && dev.getNumSupportedGroups(LightModelApi.MODEL_NUMBER) != 0) {
                 mGroupAcksWaiting++;
                 GroupModelApi.setModelGroupId(deviceId, PowerModelApi.MODEL_NUMBER, index, 0, group);
             }
-        }
-        else if (dev.isModelSupported(SwitchModelApi.MODEL_NUMBER) && dev.getNumSupportedGroups(SwitchModelApi.MODEL_NUMBER) != 0) {
+        } else if (dev.isModelSupported(SwitchModelApi.MODEL_NUMBER) && dev.getNumSupportedGroups(SwitchModelApi.MODEL_NUMBER) != 0) {
             mGroupAcksWaiting++;
             GroupModelApi.setModelGroupId(deviceId, SwitchModelApi.MODEL_NUMBER, index, 0, group);
-        }
-        else if (dev.isModelSupported(SensorModelApi.MODEL_NUMBER) && dev.getNumSupportedGroups(SensorModelApi.MODEL_NUMBER) != 0) {
+        } else if (dev.isModelSupported(SensorModelApi.MODEL_NUMBER) && dev.getNumSupportedGroups(SensorModelApi.MODEL_NUMBER) != 0) {
             mGroupAcksWaiting++;
             GroupModelApi.setModelGroupId(deviceId, SensorModelApi.MODEL_NUMBER, index, 0, group);
-        }
-        else if (dev.isModelSupported(ActuatorModelApi.MODEL_NUMBER) && dev.getNumSupportedGroups(ActuatorModelApi.MODEL_NUMBER) != 0) {
+        } else if (dev.isModelSupported(ActuatorModelApi.MODEL_NUMBER) && dev.getNumSupportedGroups(ActuatorModelApi.MODEL_NUMBER) != 0) {
             mGroupAcksWaiting++;
             GroupModelApi.setModelGroupId(deviceId, ActuatorModelApi.MODEL_NUMBER, index, 0, group);
         }
@@ -1350,10 +1393,10 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     byte green = (byte) (Color.green(mColorToSend) & 0xFF);
                     byte blue = (byte) (Color.blue(mColorToSend) & 0xFF);
 
-                    LightModelApi.setRgb(mSendDeviceId, red, green, blue, (byte)0xFF, 0, false);
+                    LightModelApi.setRgb(mSendDeviceId, red, green, blue, (byte) 0xFF, 0, false);
 
                     Device light = mDeviceStore.getDevice(mSendDeviceId);
-                    LightState state = (LightState)light.getState(StateType.LIGHT);
+                    LightState state = (LightState) light.getState(StateType.LIGHT);
                     if (light != null) {
                         state.setRed(red);
                         state.setGreen(green);
@@ -1407,10 +1450,10 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             }
 
             if (mSendDeviceId != Device.DEVICE_ID_UNKNOWN && mDataToSend != null) {
-                if(!RECIPE_IND_SEND_DATA) {
+                if (!RECIPE_IND_SEND_DATA) {
                     DataModelApi.sendData(mSendDeviceId, mDataToSend, false);
                     Log.d(TAG, "run: 设备控制---设备id ： " + mSendDeviceId + "---  发送的值是：" + bytesToHexString(mDataToSend));
-                } else{
+                } else {
                     DataModelApi.sendData(indDeviceId, mDataToSend, false);
                     Log.d(TAG, "run: 设备控制 indDeviceId ---设备id ： " + indDeviceId + "---  发送的值是：" + bytesToHexString(mDataToSend));
                 }
@@ -1448,7 +1491,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         }
     };
 
-    private Runnable progressTimeOut =  new Runnable() {
+    private Runnable progressTimeOut = new Runnable() {
         @Override
         public void run() {
 
@@ -1472,8 +1515,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     /**
      * Show a modal progress dialogue until hideProgress is called.
      *
-     * @param message
-     *            The message to display in the dialogue.
+     * @param message The message to display in the dialogue.
      */
     private void showProgress(String message) {
         if (mProgress == null) {
@@ -1499,15 +1541,16 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     private void hideProgress() {
         if (mProgress != null) {
             mProgress.dismiss();
-            mProgress=null;
+            mProgress = null;
         }
     }
 
     /**
      * Add a device to the device store, creating state based on model support.
-     * @param deviceId Device id of the device to add.
-     * @param uuidHash 31-bit UUID hash of the device to add.
-     * @param shortName Appearance short name if known, otherwise null.
+     *
+     * @param deviceId              Device id of the device to add.
+     * @param uuidHash              31-bit UUID hash of the device to add.
+     * @param shortName             Appearance short name if known, otherwise null.
      * @param modelSupportBitmapLow The low part of the model support bitmap. Currently the only part we care about.
      */
     private void addDevice(final int deviceId, String uuid, int uuidHash, String shortName, long modelSupportBitmapLow, final boolean showToast) {
@@ -1519,15 +1562,14 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         int id = deviceId - Device.DEVICE_ADDR_BASE;
         String name = String.format(shortName.trim() + " %d", id);
 
-        Log.i("shortName" ,"name = " + name);
+        Log.i("shortName", "name = " + name);
 
-        final SingleDevice device = new SingleDevice(deviceId, uuid, uuidHash, name, shortName , modelSupportBitmapLow, 0);
+        final SingleDevice device = new SingleDevice(deviceId, uuid, uuidHash, name, shortName, modelSupportBitmapLow, 0);
         Log.d(TAG, "addDevice: " + device.toString());
         Log.i("shortName", "shortName = " + device.toString());
         mDeviceStore.addDevice(device);//存进数据库
 
         String masterAppId = CacheUtils.getString(MainActivity.this, WelcomeUI.MASTER_APP_ID);
-
 
 
         if (showToast && masterAppId != null) {
@@ -1607,11 +1649,14 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                                             typeData = new DeviceType(shortname, Utils.ParseJSON(info, "ver"));
                                         }
                                     }
+                                    //I/filePath: downPath = /storage/emulated/0/master/RHood.zip
 
+                                    isNeedUpdate = true;
                                     if (isNeedUpdate) {
                                         final DeviceType data = typeData;
                                         final String downloadUrl = Environment.getExternalStorageDirectory().getPath() + "/master/";
                                         //不存在或要更新，需下载
+                                        Log.i("filePath", "downPath = " + downloadUrl + shortname + ".zip");
                                         HttpUtils http = new HttpUtils();
                                         http.download(Constans.BASE_URL + src, downloadUrl + shortname + ".zip", true, true, new RequestCallBack<File>() {
 
@@ -1723,29 +1768,27 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             mDeviceStore.loadAllDevices();
 
             // set next device id to be used according with the last device used in the database.
-            mService.setNextDeviceId(mDeviceStore.getSetting().getLastDeviceIndex()+1);
+            mService.setNextDeviceId(mDeviceStore.getSetting().getLastDeviceIndex() + 1);
 
             // set TTL to the library
             mService.setTTL(mDeviceStore.getSetting().getTTL());
-        }
-        else {
+        } else {
             // No setting founded. We need to create one...
             Setting setting = new Setting();
             setting.setLastGroupIndex(Device.GROUP_ADDR_BASE + 5);
             mDeviceStore.setSetting(setting, true);
 
             // add group devices. By default we add 5 groups (1 for "All" with id=0 and 4 extra with ids 1-4).
-            for (int i=0; i < 5 ; i++) {
+            for (int i = 0; i < 5; i++) {
                 GroupDevice group;
-                if (i==0) {
+                if (i == 0) {
                     group = new GroupDevice(Device.GROUP_ADDR_BASE, getString(R.string.all_lights));
-                }
-                else {
+                } else {
                     group = new GroupDevice(Device.GROUP_ADDR_BASE + i, getString(R.string.group) + " " + i);
                 }
 
                 // store the group in the database.
-                mDeviceStore.addGroupDevice(group,true);
+                mDeviceStore.addGroupDevice(group, true);
             }
 
             // save in sharePreferences the last settings used.
@@ -1795,8 +1838,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 }
                 return false;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -1816,7 +1858,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
 
     @Override
     public void requestCurrentTemperature() {
-        SensorModelApi.getValue(mSendDeviceId, SensorValue.SensorType.INTERNAL_AIR_TEMPERATURE,SensorValue.SensorType.DESIRED_AIR_TEMPERATURE);
+        SensorModelApi.getValue(mSendDeviceId, SensorValue.SensorType.INTERNAL_AIR_TEMPERATURE, SensorValue.SensorType.DESIRED_AIR_TEMPERATURE);
     }
 
 
@@ -1857,7 +1899,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     public void setLocalLightPower(PowerModelApi.PowerState state) {
         Device dev = mDeviceStore.getDevice(mSendDeviceId);
         if (dev != null) {
-            PowState powState = (PowState)dev.getState(StateType.POWER);
+            PowState powState = (PowState) dev.getState(StateType.POWER);
             powState.setPowerState(state);
             mDeviceStore.addDevice(dev);
         }
@@ -1869,8 +1911,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             mDeviceStore.removeDevice(mSendDeviceId);
             listener.onDeviceRemoved(mSendDeviceId, true);
             mSendDeviceId = Device.GROUP_ADDR_BASE;
-        }
-        else {
+        } else {
             mRemovedUuidHash = mDeviceStore.getSingleDevice(mSendDeviceId).getUuidHash();
             mRemovedDeviceId = mSendDeviceId;
             mRemovedListener = listener;
@@ -1908,7 +1949,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         ConfigModelApi.getInfo(mSendDeviceId, ConfigModelApi.DeviceInfo.MODEL_LOW);
     }
 
-    private void getBatteryState(InfoListener listener){
+    private void getBatteryState(InfoListener listener) {
         mInfoListener = listener;
         BatteryModelApi.getState(mSendDeviceId);
     }
@@ -1952,9 +1993,8 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             inProgress = true;
         }
         if (inProgress) {
-            GroupModelApi.getNumModelGroupIds(mSendDeviceId,mModelsToQueryForGroups.peek());
-        }
-        else {
+            GroupModelApi.getNumModelGroupIds(mSendDeviceId, mModelsToQueryForGroups.peek());
+        } else {
             // We already know the number of supported groups from a previous query, so go straight to assigning.
             assignGroups(selectedDev.getMinimumSupportedGroups());
             inProgress = true;
@@ -1980,8 +2020,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             // Set the new setting values
             setting.setNetworkKey(networkKeyPhrase);
             setting.setAuthRequired(authRequired);
-        }
-        else {
+        } else {
             // if we don't have settings yet we need to create one and set the new setting values.
             setting = new Setting();
             setting.setNetworkKey(networkKeyPhrase);
@@ -1999,8 +2038,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         // If there are devices already associated we lead the user to go to association page otherwise we lead the user to go to light control.
         if (mDeviceStore.getAllSingleDevices().size() > 0) {
             getActionBar().setSelectedNavigationItem(SimpleNavigationListener.POSITION_LIGHT_CONTROL);
-        }
-        else {
+        } else {
             getActionBar().setSelectedNavigationItem(SimpleNavigationListener.POSITION_ASSOCIATION);
         }
 
@@ -2011,8 +2049,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     public boolean isAuthRequired() {
         if (mDeviceStore.getSetting() != null) {
             return mDeviceStore.getSetting().isAuthRequired();
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -2021,8 +2058,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     public String getNetworkKeyPhrase() {
         if (mDeviceStore.getSetting() != null) {
             return mDeviceStore.getSetting().getNetworkKey();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -2034,8 +2070,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
             intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
             startActivityForResult(intent, SCANCODE_RESULT_CODE);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
             Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
             startActivity(marketIntent);
@@ -2055,7 +2090,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 UUID uuid = null;
 
 
-                Uri uri=Uri.parse(url);
+                Uri uri = Uri.parse(url);
                 String uuidS = uri.getQueryParameter("UUID");
                 String ac = uri.getQueryParameter("AC");
 
@@ -2063,25 +2098,24 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 if (uuidS != null && ac != null && uuidS.length() == 32 && ac.length() == 16) {
                     long uuidMsb =
                             ((Long.parseLong(uuidS.substring(0, 8), 16) & 0xFFFFFFFFFFFFFFFFL) << 32)
-                                    | ((Long.parseLong(uuidS.substring(8,16),16) & 0xFFFFFFFFFFFFFFFFL));
+                                    | ((Long.parseLong(uuidS.substring(8, 16), 16) & 0xFFFFFFFFFFFFFFFFL));
                     long uuidLsb =
-                            ((Long.parseLong(uuidS.substring(16,24),16) & 0xFFFFFFFFFFFFFFFFL) << 32)
-                                    | ((Long.parseLong(uuidS.substring(24),16) & 0xFFFFFFFFFFFFFFFFL));
+                            ((Long.parseLong(uuidS.substring(16, 24), 16) & 0xFFFFFFFFFFFFFFFFL) << 32)
+                                    | ((Long.parseLong(uuidS.substring(24), 16) & 0xFFFFFFFFFFFFFFFFL));
 
-                    auth = ((Long.parseLong(ac.substring(0,8), 16) & 0xFFFFFFFFFFFFFFFFL) << 32)
+                    auth = ((Long.parseLong(ac.substring(0, 8), 16) & 0xFFFFFFFFFFFFFFFFL) << 32)
                             | ((Long.parseLong(ac.substring(8), 16) & 0xFFFFFFFFFFFFFFFFL));
 
                     uuid = new UUID(uuidMsb, uuidLsb);
 
-                }
-                else { // trying to get the UUID and AC directly from params.
+                } else { // trying to get the UUID and AC directly from params.
 
-                    Pattern	pattern =
+                    Pattern pattern =
                             Pattern.compile("&UUID=([0-9A-F]{8})"
                                             + "([0-9A-F]{8})([0-9A-F]{8})([0-9A-F]{8})"
                                             + "&AC=([0-9A-F]{8})([0-9A-F]{8})",
                                     Pattern.CASE_INSENSITIVE);
-                    Matcher  matcher = pattern.matcher(url);
+                    Matcher matcher = pattern.matcher(url);
                     if (matcher.find()) {
                         long uuidMsb =
                                 ((Long.parseLong(matcher.group(1), 16) & 0xFFFFFFFFFFFFFFFFL) << 32)
@@ -2125,12 +2159,12 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 return;
             }
 
-            Uri uri =data.getData();
+            Uri uri = data.getData();
             File file = new File(uri.getPath());
 
             // Check the extension of the file. App only accept .json extensions.
             if (!Utils.getFileExtension(file).equalsIgnoreCase(".json")) {
-                Toast.makeText(this,getString(R.string.invalid_file_extension), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.invalid_file_extension), Toast.LENGTH_SHORT).show();
 
                 // no continue.
                 return;
@@ -2147,8 +2181,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                     json.append(line);
                 }
                 br.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Toast.makeText(getApplicationContext(), getString(R.string.error_opening_file), Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -2184,8 +2217,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     public String getBridgeAddress() {
         if (mConnected) {
             return mConnectedDevices.toString();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -2197,8 +2229,8 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         //double kelvin = Utils.convertCelsiusToKelvin(celsius);
         //double kelvin = 0xff00;
         //double kelvin = 0x000a/32.0D;
-        double kelvin = celsius/32.0D;
-        mTemperatureToSend = new DesiredAirTemperature((float)kelvin);
+        double kelvin = celsius / 32.0D;
+        mTemperatureToSend = new DesiredAirTemperature((float) kelvin);
 
         if (mSendDeviceId != Device.DEVICE_ID_UNKNOWN && mTemperatureToSend != null) {
             mPendingDesiredTemperatureRequest = true;
@@ -2217,7 +2249,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         }
         mMeshHandler.removeCallbacks(transmitdataCallback);
         mMeshHandler.postDelayed(transmitdataCallback, TRANSMIT_TEMPERATURE_PERIOD_MS);
-        Log.d(TAG, "executeTask-------------1: " + mSendDeviceId + "---" +bytesToHexString(data));
+        Log.d(TAG, "executeTask-------------1: " + mSendDeviceId + "---" + bytesToHexString(data));
     }
 
     @Override
@@ -2227,12 +2259,12 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         mDataToSend = data;
         mMeshHandler.removeCallbacks(transmitdataCallback);
         mMeshHandler.postDelayed(transmitdataCallback, TRANSMIT_TEMPERATURE_PERIOD_MS);
-        Log.d(TAG, "executeTask-------------1: " + deviceId + "---" +bytesToHexString(data));
+        Log.d(TAG, "executeTask-------------1: " + deviceId + "---" + bytesToHexString(data));
 
     }
 
     @Override
-    public void setDesiredDataWithId(final int deviceId,final byte[] data) {
+    public void setDesiredDataWithId(final int deviceId, final byte[] data) {
 
         mSceneDataToSend = data;
         mSendSceneDeviceId = deviceId;
@@ -2250,20 +2282,20 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                 }
 
                 if (deviceId != Device.DEVICE_ID_UNKNOWN && data != null) {
-                    DataModelApi.sendData(deviceId,data ,false);
-                    Log.d(TAG, "run: 场景控制---设备id ： " + deviceId  + "---  发送的值是："+ bytesToHexString(data) );
+                    DataModelApi.sendData(deviceId, data, false);
+                    Log.d(TAG, "run: 场景控制---设备id ： " + deviceId + "---  发送的值是：" + bytesToHexString(data));
                 }
             }
         }, TRANSMIT_TEMPERATURE_PERIOD_MS);
-        Log.d(TAG, "executeTask-------------2: " + deviceId + "---" +bytesToHexString(data));
+        Log.d(TAG, "executeTask-------------2: " + deviceId + "---" + bytesToHexString(data));
     }
 
     @Override
-    public List<Device> getDevices(int ... modelNumber) {
+    public List<Device> getDevices(int... modelNumber) {
         ArrayList<Device> result = new ArrayList<Device>();
         for (Device dev : mDeviceStore.getAllSingleDevices()) {
             //判断模型
-            if (((SingleDevice)dev).isAnyModelSupported(modelNumber)) {
+            if (((SingleDevice) dev).isAnyModelSupported(modelNumber)) {
                 result.add(dev);
             }
         }
@@ -2274,9 +2306,9 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     public List<Device> getDevicesByShortName(String shortname) {
         ArrayList<Device> result = new ArrayList<Device>();
         for (Device dev : mDeviceStore.getAllSingleDevices()) {
-            String getShortName =  ((SingleDevice)dev).getShortName().trim();
+            String getShortName = ((SingleDevice) dev).getShortName().trim();
             //判断模型
-            if (getShortName.equals(shortname)){
+            if (getShortName.equals(shortname)) {
                 result.add(dev);
             }
         }
@@ -2287,9 +2319,9 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     @Override
     public ArrayList<String> getModelsLabelSupported(int deviceId) {
 
-        Device device =mDeviceStore.getDevice(deviceId);
+        Device device = mDeviceStore.getDevice(deviceId);
         if (device instanceof SingleDevice) {
-            return ((SingleDevice)device).getModelsLabelSupported();
+            return ((SingleDevice) device).getModelsLabelSupported();
         }
         return null;
     }
@@ -2307,7 +2339,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         DeviceInfoProtocol.requestDeviceInfo(mSendDeviceId);
     }
 
-    public Handler getMeshHandler(){
+    public Handler getMeshHandler() {
         return mMeshHandler;
     }
 
@@ -2366,7 +2398,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
     public void setTTLForMCP(int ttl) {
         // set ttl to the library
         mService.setTTL(ttl);
-        Setting settings =mDeviceStore.getSetting();
+        Setting settings = mDeviceStore.getSetting();
         settings.setTTL(ttl);
 
         // save new settings with the new TTL value
@@ -2375,6 +2407,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
 
     /**
      * Notify device association has finished.
+     *
      * @param success
      */
     private void deviceAssociated(boolean success, String message) {
@@ -2401,7 +2434,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         return mTemperatureStatus.get(mSendDeviceId);
     }
 
-    public byte[] getInitData(){
+    public byte[] getInitData() {
         return mInitData.get(mSendDeviceId);
     }
 
@@ -2432,12 +2465,12 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                             public void run() {
 
                                 // read json and set to the database.
-                                final boolean success = mDeviceStore.setConfigurationFromJson(json.toString(),mDeviceStore.getSetting().getNetworkKey());
+                                final boolean success = mDeviceStore.setConfigurationFromJson(json.toString(), mDeviceStore.getSetting().getNetworkKey());
                                 runOnUiThread(new Runnable() {
                                     public void run() {
 
                                         // notify to the user.
-                                        Toast.makeText(getApplicationContext(), success?getString(R.string.import_config_complete):getString(R.string.import_config_error), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), success ? getString(R.string.import_config_complete) : getString(R.string.import_config_error), Toast.LENGTH_SHORT).show();
 
                                         // reload settings.
                                         SharedPreferences activityPrefs = getPreferences(Activity.MODE_PRIVATE);
@@ -2468,9 +2501,9 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
         @Override
         public void run() {
             boolean isOk = true;
-            while(isOk) {
+            while (isOk) {
                 Log.i("again", "MyTask AGAIN_IS_SUCESS = " + AGAIN_IS_SUCESS);
-                if(!AGAIN_IS_SUCESS) {
+                if (!AGAIN_IS_SUCESS) {
                     isOpenTask = true;
                     Log.i("again", "进入重连任务！");
                     //启动服务连接蓝牙模块
@@ -2484,7 +2517,7 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
                         } else {
                             Log.i("again", "还没连接成功再睡眠5秒钟");
                             Thread.sleep(5000);
-                            if(AGAIN_IS_SUCESS){
+                            if (AGAIN_IS_SUCESS) {
                                 Log.i("again", "连接成功不退出Actiivity");
                             } else {
                                 unbindService(mServiceConnection);
@@ -2503,7 +2536,6 @@ public class MainActivity extends SlidingFragmentActivity implements RecipeListF
             }
         }
     }
-
 
 
 }

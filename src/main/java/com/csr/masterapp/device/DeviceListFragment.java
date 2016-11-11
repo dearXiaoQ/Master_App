@@ -156,7 +156,7 @@ public class DeviceListFragment extends Fragment implements GroupListener,InfoLi
 
 
     //初始化文字数组
-    private String[] data = {"Ecookpan", "油烟机", "灯", "人体传感器", "光线传感器", "烟雾传感器"};
+  //  private String[] data = {"Ecookpan", "油烟机", "灯", "人体传感器", "光线传感器", "烟雾传感器"};
 
     private String associateUUID;
 

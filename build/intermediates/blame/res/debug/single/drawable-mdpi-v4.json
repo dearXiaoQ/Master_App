@@ -12,11 +12,11 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-mdpi\\ic_alert.png"
     },
     {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_navigation_expand_more.png",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-mdpi\\ic_navigation_expand_more.png"
-    },
-    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_navigation_expand_less.png",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-mdpi\\ic_navigation_expand_less.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_navigation_expand_more.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable-mdpi\\ic_navigation_expand_more.png"
     }
 ]

@@ -1,6 +1,7 @@
 package com.csr.masterapp;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,10 +20,12 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
 
     protected Activity mActivity;
+    protected Resources mResources;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
+        mResources = mActivity.getResources();
     }
 
     @Override

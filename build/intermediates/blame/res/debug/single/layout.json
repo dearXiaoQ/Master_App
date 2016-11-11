@@ -1,15 +1,35 @@
 [
     {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_text_scene.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\activity_text_scene.xml"
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\zero_page.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\zero_page.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_gv_device.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_gv_device.xml"
     },
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\light_control_tab.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\light_control_tab.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\group_assignment.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\group_assignment.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_text_scene.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\activity_text_scene.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_gos_wifi_list.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_gos_wifi_list.xml"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\association_list_row.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\association_list_row.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\giz_conn_device.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\giz_conn_device.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\welcome.xml",
@@ -32,20 +52,20 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\activity_header.xml"
     },
     {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\light_control_tab.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\light_control_tab.xml"
-    },
-    {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\group_assignment.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\group_assignment.xml"
-    },
-    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\device_list_fragment.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\device_list_fragment.xml"
     },
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\alert_view.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\alert_view.xml"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_list_scene.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_list_scene.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main_float_button.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\main_float_button.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\scan_list_row.xml",
@@ -54,10 +74,6 @@
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\slidingmenumain.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\exploded-aar\\gmri-master-App-Demo\\slidingmenuLibrary\\unspecified\\res\\layout\\slidingmenumain.xml"
-    },
-    {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main_float_button.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\main_float_button.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\association_fragment.xml",
@@ -84,12 +100,12 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\content.xml"
     },
     {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_scene.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_scene.xml"
-    },
-    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_add_task.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\activity_add_task.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_scene.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_scene.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ly_item_des.xml",
@@ -104,12 +120,12 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_menu.xml"
     },
     {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\base_tab.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\base_tab.xml"
-    },
-    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\scene_list_fragment.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\scene_list_fragment.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\base_tab.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\base_tab.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
@@ -120,6 +136,10 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\scene_control_tab.xml"
     },
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_gos_mode_list.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_gos_mode_list.xml"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_define_date_list.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_define_date_list.xml"
     },
@@ -128,12 +148,12 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\recipe_list_fragment.xml"
     },
     {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\about_fragment.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\about_fragment.xml"
-    },
-    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_device_list.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\activity_device_list.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\about_fragment.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\about_fragment.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_and_register.xml",
@@ -184,16 +204,16 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\device_show_image.xml"
     },
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_device.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_device.xml"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\scene_list_item_empty.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\scene_list_item_empty.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_insert_name.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\dialog_insert_name.xml"
-    },
-    {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_device.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\layout\\item_device.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_container.xml",

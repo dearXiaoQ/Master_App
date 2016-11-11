@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="40dp"
-                android:text="添加设备"
+                android:text="@string/add_device"
                 android:textSize="14sp"
                 android:textColor="#8b8a8a"
                 android:background="@drawable/button_common_selector"/>

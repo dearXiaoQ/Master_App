@@ -336,7 +336,7 @@ public class CreateSceneUI extends Activity implements View.OnClickListener, Tex
         final AlertDialog.Builder builder = new AlertDialog.Builder(CreateSceneUI.this);
         builder.setPositiveButton(R.string.menu_delete, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+                public void onClick(DialogInterface dialog, int which) {
                 if (parent.equals(mConditionListview)) {
                     mConditions.remove(position);
                     findViewById(R.id.tv_no_condition).setVisibility(mConditions.size() == 0 ? View.VISIBLE : View.GONE);

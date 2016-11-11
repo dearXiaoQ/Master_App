@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_remove_scene"
         android:icon="?remove"
-        android:title="删除"
+        android:title="@string/menu_delete"
         android:showAsAction="ifRoom|withText" />
 
 </menu>

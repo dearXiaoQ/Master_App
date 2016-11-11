@@ -26,6 +26,8 @@ import com.csr.masterapp.R;
 import com.csr.masterapp.entities.SingleDevice;
 import com.csr.masterapp.interfaces.TemperatureListener;
 
+import java.util.Locale;
+
 
 /**
  * Fragment to show device control.
@@ -226,6 +228,12 @@ public class DeviceControlFragment extends Fragment implements TemperatureListen
         public void setData(byte[] data) {
             setNewValue(data,true);
         }
+
+        @JavascriptInterface
+        public String getLang(){    //网页语言适配
+                return Locale.getDefault().getLanguage();
+        }
+
     }
 
     private void setNewValue(byte[] data, boolean request) {

@@ -1,6 +1,8 @@
 package com.csr.masterapp;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -23,8 +25,14 @@ import android.widget.Toast;
 import com.csr.masterapp.database.DataBaseDataSource;
 import com.csr.masterapp.entities.User;
 import com.csr.masterapp.utils.CacheUtils;
+import com.gizwits.gizwifisdk.api.GizWifiSDK;
+import com.gizwits.gizwifisdk.enumration.GizUserAccountType;
+import com.gizwits.gizwifisdk.enumration.GizWifiErrorCode;
+import com.gizwits.gizwifisdk.listener.GizWifiSDKListener;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LoginAndRegisterUI extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -33,7 +41,7 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
 
     private static final String TAG = "LoginAndRegisterUI";
 
-    private ArrayList<User> allUsers;
+    private List<User> allUsers = null;
     private EditText mUserName;
     private EditText mPassword;
     private EditText mNewUserName;
@@ -45,7 +53,16 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
     private View appWelcome;
     private Boolean isVisible = true;
 
+    private String logUser = "";
+    private String logPwd  = "";
+
     private Resources mResourts;
+    private ProgressDialog dialog;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +70,22 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
         requestWindowFeature(Window.FEATURE_NO_TITLE); //设置无标题
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去除状态栏
         setContentView(R.layout.login_and_register);
+
+        mResourts = this.getResources();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new AnimRunnable(), 3000);
+
+        //初始化控件
+        initView();
+
+        //设置动画
+        setAnim();
+
+    }
+
+    //初始化控件和数据库
+    private void initView() {
 
         findViewById(R.id.btn_skip).setOnClickListener(this);
         appWelcome = findViewById(R.id.rv_app_welcome);
@@ -62,38 +95,15 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
         scaleAnimation.setDuration(SCALE_ANIMATION_DURATION);
         findViewById(R.id.bg_app_welcome).startAnimation(scaleAnimation);
 
-        mResourts = this.getResources();
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        new Thread(){
+            @Override
             public void run() {
-                if (isVisible) {
-                    AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 0f);
-                    alphaAnimation.setDuration(ANIMATION_DURATION);
-                    appWelcome.startAnimation(alphaAnimation);
-                    //动画结束后回馈动作
-                    alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
-                            appWelcome.setVisibility(View.GONE);
-                            autoLogin();
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
-
-                        }
-                    });
-                }
+                //加载数据库的所有用户
+                mDataBase = new DataBaseDataSource(LoginAndRegisterUI.this);
+                allUsers = mDataBase.getAllUsers();
             }
-        }, 3000);
+        }.start();
 
-        mDataBase = new DataBaseDataSource(LoginAndRegisterUI.this);
-        allUsers = mDataBase.getAllUsers();
 
         findViewById(R.id.btn_login).setOnClickListener(this);
         findViewById(R.id.btn_register).setOnClickListener(this);
@@ -118,6 +128,11 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
             }
         }
 
+    }
+
+
+    //设置动画
+    private void setAnim() {
         //透明动画
         AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
         alphaAnimation.setDuration(ANIMATION_DURATION);
@@ -138,7 +153,8 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
         findViewById(R.id.ic_logo).startAnimation(set);
     }
 
-    public void autoLogin(){
+
+    public void autoLogin() {
         String autoLoginUserName = CacheUtils.getString(LoginAndRegisterUI.this, "autoLoginUserName");
         String autoLoginPassword = CacheUtils.getString(LoginAndRegisterUI.this, "autoLoginPassword");
         if (autoLoginUserName != null && autoLoginPassword != null) {
@@ -205,39 +221,106 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
                 String newUsername = mNewUserName.getText().toString().trim();
                 String newPassword = mNewPassword.getText().toString().trim();
 
-                if (newUsername.equals("") || newPassword.equals("")) {
-                    Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.user_name_and_password_is_not_null), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (newUsername.length() < 6) {
-                    Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.user_name_less_than_six_byte), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (newPassword.length() < 6) {
-                    Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.password_less_than_six_byte), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (allUsers != null) {
-                    for (User user : allUsers) {
-                        if (user.getUserName().equals(newUsername)) {
-                            Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.user_name_alrealy_exists), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-                }
-                User result = mDataBase.createOrUpdateUser(new User(newUsername, "12345678912", newPassword, String.valueOf(System.currentTimeMillis())));
-                if (result != null && result.getUserId() != 0) {
+                userRegister(newUsername, newPassword);
 
-                    Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.register_success_ready_into), Toast.LENGTH_SHORT).show();
-
-                    startActivity(new Intent(LoginAndRegisterUI.this, WelcomeUI.class));
-                    finish();
-                }
                 break;
         }
     }
 
+    /**
+     * 登录方法
+     * @param username
+     * @param password
+     */
     private void verifyLogin(String username, String password) {
+        //本地登录
+     //  loginToDB(username, password);
+
+        //登录到机智云
+        loginToGiz(username, password);
+    }
+
+    /**
+     * 注册方法
+     */
+    private void userRegister(String newUsername, String newPassword) {
+
+        //注册本地数据库
+      //  registerToDB(newUsername, newPassword);
+
+        //注册到机智云
+        registerToGizYun(newUsername, newPassword);
+    }
+
+    //注册到机智云
+    private void registerToGizYun(String newUsername, String newPassword) {
+        GizWifiSDK.sharedInstance().setListener(mListener);
+        GizWifiSDK.sharedInstance().registerUser(newUsername, newPassword, null, GizUserAccountType.GizUserNormal);
+        //使用静态方式创建并显示，这种进度条只能是圆形条,这里最后一个参数boolean cancelable 设置是否进度条是可以取消的
+        dialog = ProgressDialog.show(this, mResourts.getString(R.string.prompt),
+                mResourts.getString(R.string.register_ing), false, true);
+    }
+
+    //离线注册到本地数据库
+    private void registerToDB(String newUsername, String newPassword) {
+        if (newUsername.equals("") || newPassword.equals("")) {
+            Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.user_name_and_password_is_not_null), Toast.LENGTH_SHORT).show();
+            return;
+        } else if (newUsername.length() < 6) {
+            Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.user_name_less_than_six_byte), Toast.LENGTH_SHORT).show();
+            return;
+        } else if (newPassword.length() < 6) {
+            Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.password_less_than_six_byte), Toast.LENGTH_SHORT).show();
+            return;
+        } else if (allUsers != null) {
+            for (User user : allUsers) {
+                if (user.getUserName().equals(newUsername)) {
+                    Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.user_name_alrealy_exists), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        }
+        User result = mDataBase.createOrUpdateUser(new User(newUsername, "12345678912", newPassword, String.valueOf(System.currentTimeMillis())));
+        if (result != null && result.getUserId() != 0) {
+
+            Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.register_success_ready_into), Toast.LENGTH_SHORT).show();
+
+            startActivity(new Intent(LoginAndRegisterUI.this, WelcomeUI.class));
+            finish();
+        }
+    }
+
+    //登录到机智云
+    private void loginToGiz(String username,String password) {
+        GizWifiSDK.sharedInstance().setListener(mListener);
+        if( checkLoginInfo(username, password) ) {
+            GizWifiSDK.sharedInstance().userLogin(username, password);
+            logUser = username;
+            logPwd  = password;
+            if (isAutoLogin) {
+                CacheUtils.setString(LoginAndRegisterUI.this, "autoLoginUserName", username);
+                CacheUtils.setString(LoginAndRegisterUI.this, "autoLoginPassword", password);
+            }
+
+            CacheUtils.setInt(LoginAndRegisterUI.this, "userId", 2);    //2是强行填进去的
+            CacheUtils.setString(LoginAndRegisterUI.this, "userName", username);
+            dialog = ProgressDialog.show(this, mResourts.getString(R.string.prompt),
+                    mResourts.getString(R.string.login), false, true);
+            dialog.show();
+        }
+    }
+
+    //检验登录信息的合法性
+    private boolean checkLoginInfo(String userNmae, String password) {
+        if (userNmae.equals("") || password.equals("")) {
+            Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.user_name_and_password_is_not_null), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return  true;
+    }
+
+    //离线登陆
+    private void loginToDB(String username, String password) {
         if (username.equals("") || password.equals("")) {
             Toast.makeText(LoginAndRegisterUI.this, mResourts.getString(R.string.user_name_and_password_is_not_null), Toast.LENGTH_SHORT).show();
             return;
@@ -283,6 +366,99 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
             }
         }
     }
+
+    //动画的Runnable
+    class AnimRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            if (isVisible) {
+                AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 0f);
+                alphaAnimation.setDuration(ANIMATION_DURATION);
+                appWelcome.startAnimation(alphaAnimation);
+                //动画结束后回馈动作
+                alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        appWelcome.setVisibility(View.GONE);
+                        autoLogin();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+            }
+        }
+    }
+
+    //机智云SDK回调
+    //实现回调
+    GizWifiSDKListener mListener = new GizWifiSDKListener() {
+        @Override
+        public void didRegisterUser(GizWifiErrorCode result, String uid, String token) {
+            // 取消进读条
+            dialogCancel(dialog);
+            if (result == GizWifiErrorCode.GIZ_SDK_SUCCESS) {
+                //注册成功，获取到uid和token
+                Log.i("GizWifiSDK", "register Success" + " token " + token + " uid" + uid);
+                Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_LONG).show();
+                //切换到登录模式
+                rvRegister.setVisibility(View.GONE);
+                rvLogin.setVisibility(View.VISIBLE);
+            } else {
+                //注册失败，弹出错误信息
+                Log.i("GizWifiSDK", "register faile" + " errorMessage = " + result);
+                Toast.makeText(getApplicationContext(), "注册失败：" + result, Toast.LENGTH_LONG).show();
+            }
+        }
+
+        //隐藏进度条
+        private void dialogCancel(Dialog dialog) {
+            if (dialog != null && dialog.isShowing()) {
+                dialog.cancel();
+            }
+        }
+
+        @Override
+        public  void didUserLogin(GizWifiErrorCode result, String uid,  String token) {
+            // 取消进度条
+            dialogCancel(dialog);
+            if(result == GizWifiErrorCode.GIZ_SDK_SUCCESS) {
+                // 登录成功，获取到uid和token
+                Log.i("GizWifiSDK", "login successs" + " result = " + result + " uid = " + uid + " token = " + token);
+                Toast.makeText(getApplicationContext(), mResourts.getString(R.string.login_success), Toast.LENGTH_LONG).show();
+                //跳转到主页面
+                jump(uid, token);
+            } else {
+                // 登录失败
+                Log.i("GizWifiSDK", "login faile" + result);
+                Toast.makeText(getApplicationContext(), mResourts.getString(R.string.login_faile), Toast.LENGTH_LONG);
+            }
+        }
+
+        //跳转
+        private void jump(String uuid, String token) {
+            if (isAutoLogin) {  //记住密码功能
+                CacheUtils.setString(LoginAndRegisterUI.this, "autoLoginUserName", logUser);
+                CacheUtils.setString(LoginAndRegisterUI.this, "autoLoginPassword", logPwd);
+            }
+            Bundle bundle = new Bundle();
+            Intent intent  = new Intent(LoginAndRegisterUI.this, WelcomeUI.class);
+            User loginUser = new User(logUser, uuid, token);
+            bundle.putSerializable("loginInfo", loginUser);
+            intent.putExtra("loginInfo", bundle);
+            startActivity(intent);
+            finish();
+            //  CacheUtils.setString();
+
+        }
+    };
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

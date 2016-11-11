@@ -190,7 +190,7 @@ public class AssociationFragment extends Fragment implements AssociationListener
             @Override
             public void onClick(final DialogInterface dialog, int which) {
                 showProgress(mResources.getString(R.string.authentication_password),ProgressDialog.STYLE_SPINNER);
-                if(MenuFragment.NETWORK_ONLINE) {   //在线状态，通过网络雁阵个
+                if(MenuFragment.NETWORK_ONLINE) {   //在线状态，通过网络验证
                     String masterAppId = CacheUtils.getString(getActivity(), WelcomeUI.MASTER_APP_ID);
                     //获取鉴权码
                     final HttpUtils utils = new HttpUtils();

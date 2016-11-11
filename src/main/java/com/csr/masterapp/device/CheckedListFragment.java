@@ -26,6 +26,7 @@ import android.widget.ListView;
 
 import com.csr.masterapp.CheckedListItem;
 import com.csr.masterapp.DevicesComparator;
+import com.csr.masterapp.adapter.CheckedItemArrayAdapter;
 import com.csr.masterapp.entities.Device;
 import com.csr.masterapp.entities.SingleDevice;
 import com.csr.mesh.ConfigModelApi;

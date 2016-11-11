@@ -1,5 +1,9 @@
 [
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_invisible.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_invisible.png"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_scene.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\tab_scene.xml"
     },
@@ -8,16 +12,24 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_selector.xml"
     },
     {
-        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\border.xml",
-        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\border.xml"
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\failsoft.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\failsoft.png"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\add_sence.png",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\add_sence.png"
     },
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\border.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\border.xml"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\float_button_bg.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\float_button_bg.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\checkbox_laws_selector.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\checkbox_laws_selector.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_add_sence_selectior.xml",
@@ -44,6 +56,10 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\menu_save.png"
     },
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_more.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_more.png"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\guide_btn_bg.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\guide_btn_bg.xml"
     },
@@ -56,12 +72,20 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\ic_lixian.png"
     },
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\login_password.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\login_password.png"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\guide_point_focus.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\guide_point_focus.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_common_selector.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_common_selector.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\img_ba_shape.xml",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\img_ba_shape.xml"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\white_bg_frame.xml",
@@ -72,12 +96,24 @@
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\header_shadow.xml"
     },
     {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\wifi_icon.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\wifi_icon.png"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_visible.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\button_visible.png"
+    },
+    {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\debug.png",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\debug.png"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\drawer_shadow.xml",
         "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\drawer_shadow.xml"
+    },
+    {
+        "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\checkmark.png",
+        "source": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\src\\main\\res\\drawable\\checkmark.png"
     },
     {
         "merged": "F:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_download.png",

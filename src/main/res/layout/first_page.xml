@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/playIv"
+        android:background="#ffae00"
+        android:layout_width="600dp"
+        android:layout_height="330dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/device_conn_course"
+        />
+    <LinearLayout
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/btnNext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:gravity="center" >
+
+        <CheckBox
+            android:id="@+id/cbSelect"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/checkbox_hook_selector"
+            android:button="@null" />
+
+        <TextView
+            android:id="@+id/tvSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/finished"
+            android:textColor="@color/black" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="300dp"
+        android:layout_marginLeft="300dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="40dp"
+            android:background="#f57c00"
+            android:textColor="@android:color/white"
+            android:text="@string/next" />
+    </LinearLayout>
+
+</LinearLayout>

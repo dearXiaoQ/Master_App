@@ -63,7 +63,7 @@ public class RecipeControlFragment extends Fragment implements View.OnClickListe
     DecimalFormat mDecimalFactor = new DecimalFormat("0.0");
 
     //使用BLE连接电磁炉
-    private static boolean USE_BLE = true;
+    private static boolean USE_BLE = false;
 
     private Spinner mIndDeviceSpinner;
     private Spinner mTemDeviceSpinner;
@@ -347,30 +347,28 @@ public class RecipeControlFragment extends Fragment implements View.OnClickListe
 
                 JSONObject obj = new JSONObject();
                 try {
-                   // obj.put("powerSw", onoff);
-                  //  obj.put("power", power);
+                 /*   obj.put("powerSw", onoff);
+                    obj.put("power", power);*/
 
-                    params.setBodyEntity(new StringEntity(obj.toString(), "UTF-8"));
+                    params.setBodyEntity(new StringEntity(obj.toString(),"UTF-8"));
                 } catch (Exception e) {
                 }
 
-                utils.send(HttpRequest.HttpMethod.POST, url, params, new RequestCallBack<String>() {
+                utils.send(HttpRequest.HttpMethod.POST, url, params ,new RequestCallBack<String>() {
 
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
-                        //场景 ecookpan -》 开抽烟机
-                     /*   if (onoff == true) {
+                    /*    //场景 ecookpan -》 开抽烟机
+                        if(onoff == true){
                             mController.setDesiredTemperature(0x000f);
-                        } else {
+                        }else{
                             mController.setDesiredTemperature(0x0000);
                         }*/
 
-                        Log.d(TAG, "onSuccess: 发送的电磁炉功率是" + data);
+                   //     Log.d(TAG, "onSuccess: 发送的电磁炉功率是" + power);
                     }
-
                     @Override
                     public void onFailure(HttpException error, String msg) {
-
                     }
                 });
             } else {

@@ -18,4 +18,8 @@
     <color name="red">#f00</color>
     <color name="button_pressed">#0001ee</color>
     <color name="orange">#f57c00</color>
+    <color name="text_blue">#298eee</color>
+    <color name="text_gray_light">#d0d0d0</color>
+    <color name="image_background">#408DC9</color>
+
 </resources>

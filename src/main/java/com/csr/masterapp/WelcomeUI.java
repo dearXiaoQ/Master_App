@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,12 +26,19 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.csr.masterapp.adapter.ScanResultAdapter;
+import com.csr.masterapp.device.GizConnDevice;
 import com.csr.masterapp.utils.CacheUtils;
 import com.csr.masterapp.utils.ScanInfo;
+import com.gizwits.gizwifisdk.api.GizWifiDevice;
+import com.gizwits.gizwifisdk.api.GizWifiSDK;
+import com.gizwits.gizwifisdk.enumration.GizEventType;
+import com.gizwits.gizwifisdk.enumration.GizWifiErrorCode;
+import com.gizwits.gizwifisdk.listener.GizWifiSDKListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 
 public class WelcomeUI extends Activity implements AdapterView.OnItemClickListener {
 
@@ -38,6 +46,9 @@ public class WelcomeUI extends Activity implements AdapterView.OnItemClickListen
 
     private ImageView ic_logo;
 
+    private Button addDeviceBtn;
+
+    public static  Context GLOBAL_CONTEXT = null;
 
     private static final String TAG = "WelcomeUI";
 
@@ -79,14 +90,82 @@ public class WelcomeUI extends Activity implements AdapterView.OnItemClickListen
 
     private int scanTimes = 0;
 
+    boolean isFirstStart;
+
+    String masterAppId;
+
+    //机智云初始化监听器
+    GizWifiSDKListener wifiSdkListener = new GizWifiSDKListener() {
+        @Override
+        public void didNotifyEvent(GizEventType eventType, Object eventSource, GizWifiErrorCode eventID,
+                                   String eventMessage) {
+            if(eventType == GizEventType.GizEventSDK) {
+                //SDK的事件通知
+                Log.i("GizWifiSDK", "SDK even happend: " + eventID + "," + eventMessage);
+            }else if(eventType == GizEventType.GizEventDevice) {
+                // 设备连接中断断开时可能产生的通知
+                GizWifiDevice device = (GizWifiDevice) eventSource;
+                Log.i("GizWifiSDK", "device mac: " + device.getMacAddress() + "disconnect caused by eventID:" +
+                        eventID + ",eventMessage: " + eventMessage);
+            } else if(eventType == GizEventType.GizEventM2MService) {
+                // M2M服务返回的异常通知
+                Log.i("GizWifiSDK", "M2M domain " + (String) eventSource + " exection happend, evenID:"
+                        + eventID + ", eventMessage: " + eventMessage);
+            } else if(eventType == GizEventType.GizEventToken) {
+                // token失效通知
+                Log.i("GizWifiSDK", "token " + (String) eventSource + " expired: " + eventMessage);
+            }
+        }
+
+        //等待配置完成或超时，回调配置完成接口
+       @Override
+        public void didSetDeviceOnboarding(GizWifiErrorCode result, String mac, String did, String productKey) {
+            if(result == GizWifiErrorCode.GIZ_SDK_SUCCESS) {
+                //配置成功
+                Log.i("GizWifiSdk", "AirLink配置成功！");
+            } else {
+                //配置失败
+                Log.i("GizWifiSdk", "AirLink配置失败或超时！");
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String Language = Locale.getDefault().getLanguage();
+        Toast.makeText(this, "当前选择的语言：" + Language, Toast.LENGTH_SHORT).show();
+        GLOBAL_CONTEXT = getApplicationContext();
+        mWelcomeUI = WelcomeUI.this;
         requestWindowFeature(Window.FEATURE_NO_TITLE); //设置无标题
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去除状态栏
         setContentView(R.layout.welcome);
+        //初始化数据（机智云初始化）
+        initData();
+        //初始化控件
+        initView();
+        //初始化蓝牙
+        initBluetooth();
+        //跳转到对应的页面
+        jump();
+    }
 
-        mWelcomeUI = WelcomeUI.this;
+    //初始化蓝牙
+    private void initBluetooth() {
+        final BluetoothManager btManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        mBtAdapter = btManager.getAdapter();
+
+        // Register for broadcasts on BluetoothAdapter state change so that we can tell if it has been turned off.
+        IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        this.registerReceiver(mReceiver, filter);
+        checkEnableBt();
+
+         isFirstStart = CacheUtils.getBoolean(this, KEY_FIRST_START, true);
+         masterAppId = CacheUtils.getString(this, WelcomeUI.MASTER_APP_ID);
+    }
+
+    //初始化控件
+    private void initView() {
         mScanListView = (ListView) this.findViewById(R.id.scanListView);
         mScanResultsAdapter = new ScanResultAdapter(this, mScanResults);
         //     mScanResultsAdapter = new ScanResultsAdapter(this, mScanResults);
@@ -102,16 +181,21 @@ public class WelcomeUI extends Activity implements AdapterView.OnItemClickListen
             }
         });
         pbar_Welcome = (ProgressBar) findViewById(R.id.pbar_Welcome);
+        addDeviceBtn = (Button) findViewById(R.id.add_device);
+        addDeviceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeUI.this, GizConnDevice.class);
+                startActivity(intent);
+            }
+        });
 
 
-        final BluetoothManager btManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBtAdapter = btManager.getAdapter();
 
-        // Register for broadcasts on BluetoothAdapter state change so that we can tell if it has been turned off.
-        IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-        this.registerReceiver(mReceiver, filter);
-        checkEnableBt();
+    }
 
+    //跳转到对应的页面
+    private void jump() {
         boolean isFirstStart = CacheUtils.getBoolean(this, KEY_FIRST_START, true);
         String masterAppId = CacheUtils.getString(this, WelcomeUI.MASTER_APP_ID);
 
@@ -133,6 +217,17 @@ public class WelcomeUI extends Activity implements AdapterView.OnItemClickListen
         if (mBtAdapter.isEnabled()) {
             scanLeDevice(true);
         }
+
+
+    }
+
+    //初始化数据（机智云初始化）
+    private void initData() {
+        GizWifiSDK.sharedInstance().startWithAppID(this, "1231241");
+
+        //初始化机智云服务
+        GizWifiSDK.sharedInstance().setListener(wifiSdkListener);
+        GizWifiSDK.sharedInstance().startWithAppID(getApplicationContext(), "3d6496883e6a4e76a378e3b762ff886d");    //appid
     }
 
     /**

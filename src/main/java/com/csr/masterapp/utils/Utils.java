@@ -6,6 +6,7 @@
 package com.csr.masterapp.utils;
 
 import android.content.Context;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 
 public class Utils {
 	
@@ -158,5 +160,25 @@ static public File writeToSDFile(String filename, String text) {
         return result;
     }
 
+
+    /**
+     * 用来获得手机扫描到的所有wifi的信息.
+     *
+     * @param c
+     *            上下文
+     * @return the current wifi scan result
+     */
+    static public List<ScanResult> getCurrentWifiScanResult(Context c) {
+        WifiManager wifiManager = (WifiManager) c.getSystemService(Context.WIFI_SERVICE);
+        wifiManager.startScan();
+        return wifiManager.getScanResults();
+    }
+
+    static public String getConnectWifiSsid(Context c) {
+        WifiManager wifiManager = (WifiManager) c.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+
+        return wifiInfo.getSSID();
+    }
 
 }

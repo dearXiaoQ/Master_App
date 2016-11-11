@@ -14,11 +14,21 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 机智云权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
 
     <uses-sdk
-    android:minSdkVersion="18"
-    android:targetSdkVersion="21" />
+        android:minSdkVersion="18"
+        android:targetSdkVersion="21" />
 
     <application
 
@@ -47,7 +57,7 @@
 
         <activity android:name=".LoginAndRegisterUI"
             android:windowSoftInputMode="stateAlwaysHidden" >
-            </activity>
+        </activity>
         <activity android:name=".GuideUI"
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation"/>
@@ -64,6 +74,11 @@
             android:configChanges="keyboardHidden|orientation"
             />
         <activity android:name=".scene.DelaySetActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"
+            />
+
+        <activity android:name=".device.GizConnDevice"
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation"
             />

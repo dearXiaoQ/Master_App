@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -114,8 +115,8 @@ public class SceneItemUI extends Activity implements AdapterView.OnItemClickList
         switch (mStreamType){
             case 0:
                 mTitle.setText(R.string.start_condition);
-                SingleDevice Click = new SingleDevice(-1, "", 0 , getApplicationContext().getResources().getString(R.string.click_start), "", 0, 0);
-                SingleDevice alarm = new SingleDevice(-1, "", 0 , getApplicationContext().getResources().getString(R.string.timer_start), "", 0, 0);
+                SingleDevice Click = new SingleDevice(-1, "", 0 , mResources.getString(R.string.click_start), "", 0, 0);
+                SingleDevice alarm = new SingleDevice(-1, "", 0 , mResources.getString(R.string.delay_start), "", 0, 0);
                 mSingleDevices.add(Click);
                 mSingleDevices.add(alarm);
                 break;
@@ -155,6 +156,7 @@ public class SceneItemUI extends Activity implements AdapterView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.i("delay", "position = " + position  + " mStreamType = " + mStreamType  + "mConditionMode" + mConditionMode);
         if (mSingleDevices == null) {
             return;
         }

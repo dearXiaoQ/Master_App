@@ -1,0 +1,6 @@
+CHANGED,F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\csr\masterapp\device\DeviceListFragment$override.class
+CHANGED,F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\csr\masterapp\fragment\ZeroPage$override.class
+CHANGED,F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\csr\masterapp\MainActivity$override.class
+CHANGED,F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
+CHANGED,F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\csr\masterapp\Recipe\RecipeControlFragment2$override.class
+CHANGED,F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\csr\masterapp\Recipe\RecipeControlFragment$override.class

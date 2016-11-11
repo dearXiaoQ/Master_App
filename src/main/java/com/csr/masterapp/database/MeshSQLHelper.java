@@ -6,9 +6,13 @@
 package com.csr.masterapp.database;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.csr.masterapp.R;
+import com.csr.masterapp.WelcomeUI;
 
 import java.io.File;
 
@@ -164,7 +168,9 @@ public class MeshSQLHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase database) {
 
 		Log.w(TAG, "Creating database...");
-
+		String switchStr = WelcomeUI.GLOBAL_CONTEXT.getResources().getString(R.string.switch_);
+		String windSpeed = WelcomeUI.GLOBAL_CONTEXT.getResources().getString(R.string.wind_speed);
+		String lighting  = WelcomeUI.GLOBAL_CONTEXT.getResources().getString(R.string.lighting);
 		// creating required tables
 		database.execSQL(CREATE_TABLE_SETTINGS);
 		database.execSQL(CREATE_TABLE_USERS);
@@ -175,16 +181,16 @@ public class MeshSQLHelper extends SQLiteOpenHelper {
 		database.execSQL(CREATE_TABLE_SCENES);
 		database.execSQL(CREATE_TABLE_DEVICE_STREAM);
 		database.execSQL(CREATE_TABLE_DEVICE_DES);
-		database.execSQL("INSERT INTO device_stream (stream_id, stream_name, stream_description, short_name, type, data_type) " + "VALUES ('1', 'power', '开关', 'Light', 1, 0);");
+		database.execSQL("INSERT INTO device_stream (stream_id, stream_name, stream_description, short_name, type, data_type) " + "VALUES ('1', 'power', '" + switchStr + "', 'Light', 1, 0);");
 		database.execSQL("INSERT INTO device_des (stream_id, key, value) " + "VALUES ('1', 'open', '1');");
 		database.execSQL("INSERT INTO device_des (stream_id, key, value) " + "VALUES ('1', 'close', '0');");
-		database.execSQL("INSERT INTO device_stream (stream_id, stream_name, stream_description, short_name, type, data_type) " + "VALUES ('2', 'power', '开关', 'RHood', 1, 0);");
+		database.execSQL("INSERT INTO device_stream (stream_id, stream_name, stream_description, short_name, type, data_type) " + "VALUES ('2', 'power', '" + switchStr +  "', 'RHood', 1, 0);");
 		database.execSQL("INSERT INTO device_des (stream_id, key, value) " + "VALUES ('2', 'open', '1');");
 		database.execSQL("INSERT INTO device_des (stream_id, key, value) " + "VALUES ('2', 'close', '0');");
-		database.execSQL("INSERT INTO device_stream (stream_id, stream_name, stream_description, short_name, type, data_type) " + "VALUES ('3', 'mark', '风速', 'RHood', 1, 0);");
+		database.execSQL("INSERT INTO device_stream (stream_id, stream_name, stream_description, short_name, type, data_type) " + "VALUES ('3', 'mark', '" + windSpeed + "', 'RHood', 1, 0);");
 		database.execSQL("INSERT INTO device_des (stream_id, key, value) " + "VALUES ('3', 'fast wind', '1');");
 		database.execSQL("INSERT INTO device_des (stream_id, key, value) " + "VALUES ('3', 'slow wind', '0');");
-		database.execSQL("INSERT INTO device_stream (stream_id, stream_name, stream_description, short_name, type, data_type) " + "VALUES ('4', 'light', '照明', 'RHood', 1, 0);");
+		database.execSQL("INSERT INTO device_stream (stream_id, stream_name, stream_description, short_name, type, data_type) " + "VALUES ('4', 'light', '" + lighting + "', 'RHood', 1, 0);");
 		database.execSQL("INSERT INTO device_des (stream_id, key, value) " + "VALUES ('4', 'open light', '1');");
 		database.execSQL("INSERT INTO device_des (stream_id, key, value) " + "VALUES ('4', 'close light', '0');");
 

@@ -4,30 +4,41 @@
     api-level="22"
     density="hdpi"
     format="7"
-    timestamp="183563038606199"
+    timestamp="261837366987163"
     token="-8723395813971952437" >
 
     <task
         name="javac"
-        duration="2097" />
+        duration="1802" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="2280" />
+        duration="202" />
     <task
         name="verifier"
-        duration="1026" />
+        duration="121" />
 
     <artifact
-        location="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\outputs\apk\app-debug.apk"
-        type="MAIN" />
+        location="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+        type="DEX" />
+    <artifact
+        location="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
+        type="DEX" />
 
-    <build timestamp="183563038606199" >
+    <build timestamp="261628655641487" >
         <artifact
             location="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
+    </build>
+    <build timestamp="261837366987163" >
+        <artifact
+            location="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+            type="DEX" />
+        <artifact
+            location="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
+            type="DEX" />
     </build>
 
 </instant-run>
