@@ -276,6 +276,7 @@ public class RecipeControlFragment extends Fragment implements View.OnClickListe
             MainActivity.RECIPE_IND_SEND_DATA = true;
             mController.setIndDesireData(data, indDeviceId);
             Log.i("sendData", "发送的数据" + bytesToHexString(data));
+
         }
     }
 
