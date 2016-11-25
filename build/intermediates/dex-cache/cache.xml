@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="7d04936a2438ce5fa13aeb4f9305f0cd8bab30e1">
+        sha1="8718a37eb337d54042a38ae82c998b48fc20eb6a">
         <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_d9a1d283bb4b89756f3d68879d6a2794eab23f3f\classes.dex" />
     </item>
     <item
@@ -61,7 +61,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="fa8198754aff337296a1841d9cca0bc73890f6d8">
+        sha1="f4003a49da907837e9339f8a57a18d091265c4f9">
         <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_f51f3c52ccc2e36a194cfbd265a59b5870a9ffc8\classes.dex" />
     </item>
     <item
