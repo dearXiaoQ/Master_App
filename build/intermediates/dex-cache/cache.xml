@@ -1,3 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\simpleconfigwizardlib.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="0663943461ba77594377d342ced515e2d7dca900">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\simpleconfigwizardlib_9559612b20d1570f4f451ab6e4166891370715da\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mars\.gradle\caches\modules-2\files-2.1\com.madgag.spongycastle\prov\1.51.0.0\6755081df770180856ca48694b40cd34c2208128\prov-1.51.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6755081df770180856ca48694b40cd34c2208128">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\prov-1.51.0.0_fc4c0657fb2bcbc1251f19348518515899627b68\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.1.0_0dacf6023aaee1b1a037efde277d0217b69d5c17\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\hiflying-iots-android-smartlink7.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c5dc3c2ab75a56e606040805e2c33ea4c6c01880">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\hiflying-iots-android-smartlink7.0.2_cf651dd3e4bf053acdf0d9b4eea818bed7deab79\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\LSFSK_1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="577f62734f27e37de527687b91f80c240faa36bd">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\LSFSK_1.0_005b0ce12bae6ef12585e9a59c0897dc494b893e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="7d04936a2438ce5fa13aeb4f9305f0cd8bab30e1">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_d9a1d283bb4b89756f3d68879d6a2794eab23f3f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="fa8198754aff337296a1841d9cca0bc73890f6d8">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_f51f3c52ccc2e36a194cfbd265a59b5870a9ffc8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-22.2.0_021cee2eae2f295df0eb94550cf9acd1a56689c5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\Lark7618SDK_noudp1606031910_0101.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="9edeb9e389e2f4423152b9d8053ca53c4e3da121">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\Lark7618SDK_noudp1606031910_0101_1dee819733aea7e83243a12baf9c9292ff2abb04\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\GizWifiSDK.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c1dfe1aa88127be1a70f08ca9f844e839d6374de">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\GizWifiSDK_2eac4e43487b458258feefe6c91c694b0b609583\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-22.2.0_8565d8a53cd68adacfad143f18f5794ed6394c6b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mars\.gradle\caches\modules-2\files-2.1\com.madgag.spongycastle\pkix\1.51.0.0\40a445852ca58187fc616e3a8b42de463bf14b8b\pkix-1.51.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="40a445852ca58187fc616e3a8b42de463bf14b8b">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\pkix-1.51.0.0_1736ed4146b50ff0652125dced2290f6d6963415\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\gson-2.2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\gson-2.2.4_db656a6e7aae65bfa792f402d5d73a5584bd53d8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-22.2.0_77b6b39c0034ffa252fa34ed24db8a011a8a68a5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\libForEElink.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a1202639b111412975bd004dcbc34222c8a43d12">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\libForEElink_c458cec817629264fbb4c345154a3a620a418f64\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\mars\.gradle\caches\modules-2\files-2.1\com.madgag.spongycastle\core\1.51.0.0\f642963312ea0e615ad65f28adc5a5b3a2a0862\core-1.51.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="0f642963312ea0e615ad65f28adc5a5b3a2a0862">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\core-1.51.0.0_2bcca7a591053da3133e85beb48f41549260ce42\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\OneShotConfig.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="768977ab6a04843973ab9f06113c2ece4e4890bf">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\OneShotConfig_62029cd6c305784716b9a4163c4857b4ef5b6f07\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\BLEasyConfig.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="44b2a7b4c787693373bbdbb9dce61f25766a8899">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\BLEasyConfig_4699eba3e75169ebab8a0879b79590169c26450a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.1.0_18738ac488a90ecac733b8e126df5a8b92be411b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\easylink2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="639dd107e503051da416656cadc74e36ccc30f5d">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\easylink2.0_09dc9084c3018055dfc6804c075be2e33aeb3aa7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\xUtils-2.6.14.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f10c51f3e0732fdeefe6e104279a58e275879b6c">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\xUtils-2.6.14_f307b90e1328cc76a689b9052f3b3ca89f44d55a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\libEsptouch_v0.3.3.4_3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6e8b3a0511138e611f11abb6efa72d648c8f399c">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\libEsptouch_v0.3.3.4_3_60a1d99c4b67c85911dc4a3ed5a546dc8a1c8cdc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Master\master_app_copy\gmri-master-App-Demo\app\libs\android-support-v4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="3e4e879d0b3dc11f2feb3f55e77e3b5bd82c4a28">
+        <dex dex="F:\Master\master_app_copy\gmri-master-App-Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\android-support-v4_7cb242df2717526770daff80953c4ddd13a142ba\classes.dex" />
+    </item>
+
+</items>
