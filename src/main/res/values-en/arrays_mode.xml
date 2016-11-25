@@ -12,6 +12,8 @@
         <item>FSK</item>
         <item>MXCHIP3</item>
         <item>BL</item>
+        <item>AtmeIEE</item>
+        <item>其他</item>
     </string-array>
 
 </resources>

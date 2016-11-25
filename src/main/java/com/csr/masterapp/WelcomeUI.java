@@ -26,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.csr.masterapp.adapter.ScanResultAdapter;
+import com.csr.masterapp.device.DeviceListActivity;
 import com.csr.masterapp.device.GizConnDevice;
 import com.csr.masterapp.utils.CacheUtils;
 import com.csr.masterapp.utils.ScanInfo;
@@ -118,7 +119,7 @@ public class WelcomeUI extends Activity implements AdapterView.OnItemClickListen
         }
 
         //等待配置完成或超时，回调配置完成接口
-       @Override
+        @Override
         public void didSetDeviceOnboarding(GizWifiErrorCode result, String mac, String did, String productKey) {
             if(result == GizWifiErrorCode.GIZ_SDK_SUCCESS) {
                 //配置成功
@@ -160,8 +161,8 @@ public class WelcomeUI extends Activity implements AdapterView.OnItemClickListen
         this.registerReceiver(mReceiver, filter);
         checkEnableBt();
 
-         isFirstStart = CacheUtils.getBoolean(this, KEY_FIRST_START, true);
-         masterAppId = CacheUtils.getString(this, WelcomeUI.MASTER_APP_ID);
+        isFirstStart = CacheUtils.getBoolean(this, KEY_FIRST_START, true);
+        masterAppId = CacheUtils.getString(this, WelcomeUI.MASTER_APP_ID);
     }
 
     //初始化控件
@@ -181,11 +182,12 @@ public class WelcomeUI extends Activity implements AdapterView.OnItemClickListen
             }
         });
         pbar_Welcome = (ProgressBar) findViewById(R.id.pbar_Welcome);
-        addDeviceBtn = (Button) findViewById(R.id.add_device);
+        addDeviceBtn = (Button) findViewById(R.id.add_deviceBtn);
         addDeviceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeUI.this, GizConnDevice.class);
+                /** 临时 */
+                Intent intent = new Intent(WelcomeUI.this, DeviceListActivity.class);
                 startActivity(intent);
             }
         });

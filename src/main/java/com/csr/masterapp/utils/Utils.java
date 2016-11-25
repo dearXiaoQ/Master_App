@@ -6,9 +6,16 @@
 package com.csr.masterapp.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.text.TextUtils;
+
+import com.csr.masterapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +23,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 public class Utils {
@@ -24,8 +32,13 @@ public class Utils {
 	private static final int AD_TYPE_COMPLETE_LIST_OF_16_BIT_UUIDS = 0x03;
 	private static final byte UUID_1 = (byte)0xF1;
     private static final byte UUID_2 = (byte)0xFE;
-    
-    
+
+
+    /** The ButtonColor Key */
+    private static final String ButtonColor_Key = "buttonColor";
+
+    static HashMap<String, Object> infoMap;
+
 	/**
      * Parse a scan record and check if the advert was from a CSRmesh bridge.
      * @param scanRecord The scan data returned from the LeScanCallback.
@@ -180,5 +193,6 @@ static public File writeToSDFile(String filename, String text) {
 
         return wifiInfo.getSSID();
     }
+
 
 }

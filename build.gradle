@@ -4,8 +4,6 @@ android {
     compileSdkVersion 21
     buildToolsVersion '23.0.3'
 
-    compileOptions.encoding = 'UTF-8'
-
     defaultConfig {
         applicationId "com.gmri.masterapp_alpha"
         minSdkVersion 19

@@ -65,7 +65,7 @@
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:background">@drawable/img_ba_shape</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">18dp</item>
     </style>
 

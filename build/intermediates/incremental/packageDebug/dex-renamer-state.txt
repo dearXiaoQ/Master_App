@@ -1,0 +1,7 @@
+#Fri Nov 25 14:39:45 CST 2016
+base.0=F\:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_d9a1d283bb4b89756f3d68879d6a2794eab23f3f
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=F\:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_f51f3c52ccc2e36a194cfbd265a59b5870a9ffc8\\classes.dex
+base.1=F\:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_f51f3c52ccc2e36a194cfbd265a59b5870a9ffc8
+file.0=F\:\\Master\\master_app_copy\\gmri-master-App-Demo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_d9a1d283bb4b89756f3d68879d6a2794eab23f3f\\classes.dex

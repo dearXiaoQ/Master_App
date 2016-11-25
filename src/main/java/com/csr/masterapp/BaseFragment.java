@@ -42,6 +42,10 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    /**
+     * 初始化Fragment界面布局
+     * @return
+     */
     protected abstract View initView();
 
     protected void initData(){}

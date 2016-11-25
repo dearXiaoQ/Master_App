@@ -20,12 +20,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 机智云权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
@@ -55,8 +51,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name="com.csr.masterapp.LoginAndRegisterUI"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name="com.csr.masterapp.GuideUI"
             android:configChanges="keyboardHidden|orientation"
@@ -83,12 +78,15 @@
             android:name="com.csr.masterapp.device.GizConnDevice"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape" />
+        <activity
+            android:name="com.csr.masterapp.device.DeviceListActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="landscape" />
 
         <service
             android:name="com.csr.mesh.MeshService"
             android:enabled="true"
-            android:exported="false" >
-        </service>
+            android:exported="false" />
 
         <receiver
             android:name="com.csr.masterapp.receiver.AlarmServiceBroadcastReciever"
@@ -113,8 +111,7 @@
         <service
             android:name="com.csr.masterapp.service.SchedulingService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -122,6 +119,8 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name="com.csr.masterapp.device.GizDeviceControl" />
     </application>
 
 </manifest>

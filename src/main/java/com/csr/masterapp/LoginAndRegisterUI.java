@@ -234,10 +234,10 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
      */
     private void verifyLogin(String username, String password) {
         //本地登录
-     //  loginToDB(username, password);
+         loginToDB(username, password);
 
         //登录到机智云
-        loginToGiz(username, password);
+      //  loginToGiz(username, password);
     }
 
     /**
@@ -246,19 +246,24 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
     private void userRegister(String newUsername, String newPassword) {
 
         //注册本地数据库
-      //  registerToDB(newUsername, newPassword);
+        registerToDB(newUsername, newPassword);
 
         //注册到机智云
-        registerToGizYun(newUsername, newPassword);
+        //registerToGizYun(newUsername, newPassword);
     }
 
     //注册到机智云
     private void registerToGizYun(String newUsername, String newPassword) {
         GizWifiSDK.sharedInstance().setListener(mListener);
-        GizWifiSDK.sharedInstance().registerUser(newUsername, newPassword, null, GizUserAccountType.GizUserNormal);
+   /*     GizWifiSDK.sharedInstance().registerUser(newUsername, newPassword, null, GizUserAccountType.GizUserNormal);
         //使用静态方式创建并显示，这种进度条只能是圆形条,这里最后一个参数boolean cancelable 设置是否进度条是可以取消的
         dialog = ProgressDialog.show(this, mResourts.getString(R.string.prompt),
-                mResourts.getString(R.string.register_ing), false, true);
+                mResourts.getString(R.string.register_ing), false, true);*/
+        if(newPassword.equals("")) {
+            GizWifiSDK.sharedInstance().requestSendPhoneSMSCode("733b467745fb4546b6091c9cb9fbf306", "13533566275");
+        } else {
+            GizWifiSDK.sharedInstance().registerUser(newUsername, "52238lyq", newPassword, GizUserAccountType.GizUserPhone);
+        }
     }
 
     //离线注册到本地数据库
@@ -294,6 +299,7 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
     private void loginToGiz(String username,String password) {
         GizWifiSDK.sharedInstance().setListener(mListener);
         if( checkLoginInfo(username, password) ) {
+            Log.i("user and pwd", "username = " + username + " password = " + password);
             GizWifiSDK.sharedInstance().userLogin(username, password);
             logUser = username;
             logPwd  = password;
@@ -437,20 +443,34 @@ public class LoginAndRegisterUI extends Activity implements View.OnClickListener
                 jump(uid, token);
             } else {
                 // 登录失败
-                Log.i("GizWifiSDK", "login faile" + result);
+                Log.i("GizWifiSDK", "login faile = " + result);
                 Toast.makeText(getApplicationContext(), mResourts.getString(R.string.login_faile), Toast.LENGTH_LONG);
             }
         }
 
+        @Override
+        public void didRequestSendPhoneSMSCode(GizWifiErrorCode result, String token) {
+            if (result == GizWifiErrorCode.GIZ_SDK_SUCCESS) {
+                // 请求成功
+                Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_LONG);
+            } else {
+                // 请求失败
+                Toast.makeText(getApplicationContext(), "请求失败", Toast.LENGTH_LONG);
+            }
+        }
+
+
         //跳转
-        private void jump(String uuid, String token) {
+        private void jump(String uid, String token) {
             if (isAutoLogin) {  //记住密码功能
                 CacheUtils.setString(LoginAndRegisterUI.this, "autoLoginUserName", logUser);
                 CacheUtils.setString(LoginAndRegisterUI.this, "autoLoginPassword", logPwd);
             }
+            CacheUtils.setString(LoginAndRegisterUI.this, "uid", uid);
+            CacheUtils.setString(LoginAndRegisterUI.this, "token", token);
             Bundle bundle = new Bundle();
             Intent intent  = new Intent(LoginAndRegisterUI.this, WelcomeUI.class);
-            User loginUser = new User(logUser, uuid, token);
+            User loginUser = new User(logUser, uid, token);
             bundle.putSerializable("loginInfo", loginUser);
             intent.putExtra("loginInfo", bundle);
             startActivity(intent);
